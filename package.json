@@ -1,0 +1,19 @@
+{
+  "name": "organiz_asso",
+  "version": "1.0.0",
+  "description": "\"interactive website for an association\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maelodie/organiz_asso.git"
+  },
+  "author": "Maeva RAMAHATAFANDRY, Jules MAZLUM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maelodie/organiz_asso/issues"
+  },
+  "homepage": "https://github.com/maelodie/organiz_asso#readme"
+}
