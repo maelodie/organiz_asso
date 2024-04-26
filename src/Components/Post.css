@@ -1,0 +1,27 @@
+#pfp {
+    width: 50px;
+    height: 50px;
+}
+
+#upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#text {
+    width: 500px;
+    height: 100px;
+    padding: 20px;
+    font-size: 16px;
+    outline: none;
+    background-color: #b9aeff; 
+}
+
+.post {
+    border: 2px solid #362c2c;
+    border-radius: 10px;
+    margin: 10px;
+    background-color: #b9aeff; 
+    padding: 20px;
+}
