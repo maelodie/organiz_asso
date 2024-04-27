@@ -1,0 +1,2 @@
+1. Comment faire en sorte de vérifier que les usernames sont uniques 
+lors de la création de compte

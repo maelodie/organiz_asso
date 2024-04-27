@@ -1,0 +1,20 @@
+POST http://localhost:4000/posts/taylorswift13
+Content-Type: application/json
+
+{
+  "author": "662d2cd94017ee680474caa0",
+  "message": "The tortured poets department is out now !"
+}
+
+###
+PATCH http://localhost:4000/posts/662d2d044017ee680474caa5
+Content-Type: application/json
+
+{
+  "message": "The tortured poets department (the anthology) is out now !"
+}
+
+###
+GET http://localhost:4000/posts/662d2d044017ee680474caa5
+
+###

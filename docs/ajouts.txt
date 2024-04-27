@@ -1,0 +1,2 @@
+package nodemon: permet de raffraichir la page à chaque changement sans devoir 
+relancer le script
