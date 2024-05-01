@@ -46,13 +46,17 @@ function SignUp() {
                     const status = response.status;
                     if (status === 201) {
                         setCurrentPage('Home');
-                    } else {
-                        alert(response.data.message || "Une erreur s'est produite lors de l'inscription.");
                     }
                 })
                 .catch(error => {
-                    console.error('Erreur', error);
-                    alert("Une erreur s'est produite lors de la communication avec le serveur.");
+                    if (error.response && error.response.status === 409) {
+                        // Erreur 409 spécifique
+                        alert("Ce nom d'utilisateur existe déjà.");
+                    } else {
+                        // Autres erreurs
+                        console.error('Erreur', error);
+                        alert("Une erreur s'est produite lors de la communication avec le serveur.");
+                    }
                 });
 
 
