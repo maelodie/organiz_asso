@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Home from './Home'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:4000'
 
 function Login() {
 
@@ -12,11 +15,25 @@ function Login() {
     // Fonction pour soumettre le formulaire
     const handleSubmit = (event) => {
         event.preventDefault();
-        //Comportement à coder
-        console.log('Username:', username);
-        console.log('Password:', password);
-        //Conditions & Verification BDD puis ->
-        setCurrentPage('Home');
+        const credentials = {
+            "username": username,
+            "password": password
+        };
+        
+        axios.post('/login', credentials) 
+        .then(response => {
+            const status = response.status;
+            if(status == 200) {
+                setCurrentPage('Home');
+            }
+            else {
+                alert(JSON.stringify(response.data));
+            }
+
+        })
+        .catch(error => {
+            console.error('Erreur', error);
+        });        
     };
 
     return (

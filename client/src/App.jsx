@@ -1,8 +1,11 @@
 import React, { useEffect , useState} from 'react';
 import Login from './Components/Login'
 import SignUp from './Components/SignUp'
+import axios from 'axios'
 import './App.css'
 
+// port du server 
+axios.defaults.baseURL = 'http://localhost:4000'
 function App() {
     const [currentPage, setCurrentPage] = React.useState(null);
 
@@ -16,6 +19,8 @@ function App() {
         setCurrentPage('SignUp');
     };
 
+    // Envoyer un POST au serveur sur les informations de l'utilisateur 
+    
     // Rendu conditionnel en fonction de la page actuelle
     return (
         <div>
