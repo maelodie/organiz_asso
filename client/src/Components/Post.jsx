@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import './Post.css';
 
-function Post({photo, username, date, text, like}) {
+function Post({key, post}) {
+
     return(
         <div className="post">
             <div id="upper">
-                <img id="pfp" src={photo} alt="pfp"></img>
-                <p>{username}</p>
-                <p>{date}</p>
+                <img id="pfp" src={post.author} alt="pfp"></img>
+                <p>{post.author}</p>
+                <p>{post.date}</p>
             </div>
             <div id="text">
-                <p>{text}</p>
+                <p>{post.message}</p>
             </div>
             <div>
-                <p> {like} likes ❤️</p>
+                <p> {post.likes} likes ❤️</p>
             </div>
         </div>
     )

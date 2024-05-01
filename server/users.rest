@@ -47,5 +47,11 @@ Content-Type: application/json
 }
 
 ###
-# Obtenir l'ID d'un user avec son username
+# Obtenir un user avec son username
+GET http://localhost:4000/users/663289f1097285bdf3e8c607
+
+### 
+# Obtenir un user avec son ID
 GET http://localhost:4000/users/taylorswift13
+
+

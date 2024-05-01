@@ -71,29 +71,45 @@ router.patch('/edit/:username', getUser, async (req, res) => {
   }
 })
 
-// getUserbyUsername : obtenir l'ID d'un utilisateur avec son username
-router.get('/:username', getUser, async (req, res) => {
-  res.json(res.user)
-}) 
+// getUser : obtenir les données d'un utilisateur avec son username
+router.get('/:identifier', getUser, (req, res) => {
+  res.json(req.userData);
+});
 
-// fonction pour obtenir l'ID d'un utilisateur en fonction de son username
+// fonction pour récupérer les données d'un utilisateur
 async function getUser(req, res, next) {
-  let user
-  console.log(req.params.username)
   try {
-    const userDatabase = await User.findOne({ username: req.params.username });
+    const { identifier } = req.params; // Le paramètre d'URL contenant le nom d'utilisateur ou l'ID
+    const userData = await getUserData(identifier); 
 
-    if (!userDatabase) {
+    if (!userData) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
-    } else {
-      user = userDatabase;
-      res.user = userDatabase;
-      next(); 
     }
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
+
+    req.userData = userData;
+    next();
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 } 
 
+// fonction pour extraire les données d'une personne (que ce soi à partir de son ID ou de son username)
+async function getUserData(identifier) {
+  try {
+    // Vérifie si l'identifiant est un ObjectId valide (ID de MongoDB)
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(identifier);
+    let userData;
+
+    if (isObjectId) {
+      userData = await User.findById(identifier); // on recherche par id si c'est un id et par username sinon
+    } else { 
+      userData = await User.findOne({ username: identifier });
+    }
+
+    return userData;
+  } catch (error) {
+    throw new Error('Erreur lors de la récupération des données de l\'utilisateur : ' + error.message);
+  }
+}
 
 module.exports = router // renvoie le routeur à server.js
