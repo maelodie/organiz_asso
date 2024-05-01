@@ -23,5 +23,9 @@ app.use('/posts', postRouter)
 const loginRouter = require('./routes/login')
 app.use('/login', loginRouter)
 
+// redirection de toutes les requêtes comportant '/signup' vers 'routes/signup'
+const signupRouter = require('./routes/signup')
+app.use('/signup', signupRouter)
+
 // démarrage du serveur
 app.listen(PORT, () => console.log('Le serveur est en marche'))

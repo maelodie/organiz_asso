@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Home from './Home'
+import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:4000'
 
 function SignUp() {
 
@@ -24,8 +26,35 @@ function SignUp() {
             console.log('Password:', password);
             console.log('Confirm Password:', confirmPassword);
 
-            //Condition & MAJ BDD ->
-            setCurrentPage('Home');
+            if(password!=confirmPassword){
+                alert("Les mot des passe ne sont pas identiques");
+
+            }else{
+
+                const credentials = {
+                    "surname": firstName,
+                    "name": lastName,
+                    "username": username,
+                    "email": email,
+                    "password": password
+                };
+    
+                axios.post('/signup', credentials) 
+                .then(response => {
+                    const status = response.status;
+                    if(status == 201) {
+                        setCurrentPage('Home');
+                    }
+                    else {
+                        alert(JSON.stringify(response.data));
+                    }
+    
+                })
+                .catch(error => {
+                    console.error('Erreur', error);
+                });
+
+            }
     };
     
     return (
