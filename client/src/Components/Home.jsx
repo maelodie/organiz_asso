@@ -34,7 +34,7 @@ function Home({username}) {
         setCurrentPage('Profil');
     };
 
-    const goToPrivateForum = () => {
+    const goToPrivateForum = () => {    
         setCurrentPage('PrivateForum');
     };
 
