@@ -10,7 +10,8 @@ function TextBox({username}){
     let id;
 
     // Gestion de la soumission
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // pour empecher le reload
         console.log(text);
     
         try {

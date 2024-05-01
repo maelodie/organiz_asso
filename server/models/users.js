@@ -27,11 +27,11 @@ const usersSchema = new mongoose.Schema({
     default: Date.now
   },
   cover: {
-    type: Buffer,
+    type: String,
     default: ''
   },
   photo: {
-    type: Buffer,
+    type: String,
     default: ''
   },
   bio: {

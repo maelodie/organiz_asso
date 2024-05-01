@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Post.css';
+import axios from 'axios';
 
-function Post({key, post}) {
+axios.defaults.baseURL = 'http://localhost:4000'
 
-    return(
+function Post({ post }) {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        if (post.author) {
+            axios.get(`users/${post.author}`)
+                .then(response => {
+                    setUser(response.data);
+                })
+                .catch(error => {
+                    console.error('Erreur', error);
+                });
+        }
+    }, [post.author]);
+
+    if (!user) {
+        return;
+    }
+
+    return (
         <div className="post">
             <div id="upper">
-                <img id="pfp" src={post.author} alt="pfp"></img>
-                <p>{post.author}</p>
+                <img id="pfp" src={user.photo} alt="pfp" />
+                <p>{user.username}</p>
                 <p>{post.date}</p>
             </div>
             <div id="text">
                 <p>{post.message}</p>
             </div>
             <div>
-                <p> {post.likes} likes ❤️</p>
+                <p>{post.likes} likes ❤️</p>
             </div>
         </div>
-    )
+    );
 }
 
 export default Post;

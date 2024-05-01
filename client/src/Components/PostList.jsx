@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Post from './Post'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:4000'
+
 function PostList({list}) {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        // requête pour chercher tous les posts de la base de donnée
         axios.get(`/posts/`)
         .then(response => {
             setPosts(response.data)
@@ -12,7 +15,7 @@ function PostList({list}) {
         .catch(error => {
             console.error('Erreur', error);
         })
-    })
+    }, []);
 
     return(
         <div>
