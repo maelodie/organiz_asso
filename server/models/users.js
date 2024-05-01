@@ -27,21 +27,25 @@ const usersSchema = new mongoose.Schema({
     default: Date.now
   },
   cover: {
-    type: Buffer
+    type: Buffer,
+    required: true,
+
   },
   photo: {
-    type: Buffer
+    type: Buffer,
+    required: true,
   },
   bio: {
-    type: String
+    type: String,
+    required: true,
   },
   valid: {
-    type: Boolean,
+    type: String,
     required: true,
     default: false
   },
   admin: {
-    type: Boolean,
+    type: String,
     required: true,
     default: false
   }

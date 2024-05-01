@@ -9,7 +9,12 @@ router.post('/', async (req, res) => {
     name: req.body.name,
     username: req.body.username, 
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    cover: req.body.cover,
+    photo: req.body.photo,
+    bio: req.body.bio,
+    valid: req.body.valid,
+    admin: req.body.admin
   })
 
   try {
