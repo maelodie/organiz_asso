@@ -5,7 +5,7 @@ const User = require('../models/users')
 // Serveur (Node.js)
 
 router.post('/', async (req, res) => {
-    const { surname, name, username, email, password } = req.body;
+    const { surname, name, username, email, password} = req.body;
 
     // Vérification si l'utilisateur existe déjà
     const existingUser = await User.findOne({ username });
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
     }
 
     // Création d'un nouvel utilisateur
-    const newUser = new User({ surname, name, username, email, password });
+    const newUser = new User({ surname, name, username, email, password});
     try {
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);

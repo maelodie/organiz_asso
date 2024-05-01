@@ -1,7 +1,8 @@
+# Pour obtenir tous les utilisateurs
 GET http://localhost:4000/users
 
 ###
-
+# Pour créer un utilisateur avec les champs minimums
 POST http://localhost:4000/users 
 Content-Type: application/json
 
@@ -14,13 +15,30 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:4000/users/662d20804c8ee243bfb281fe
+# Pour créer un utilisateur avec tous les champs requis
+POST http://localhost:4000/users 
+Content-Type: application/json
+
+{
+  "name": "Batuhan",
+  "surname": "MAZLUM",
+  "username": "az",
+  "email": "az@gmail.com",
+  "password": "az",
+  "cover": "https://pbs.twimg.com/profile_banners/1292851218159525889/1603637145/1500x500",
+  "photo": "https://apicms.thestar.com.my/uploads/images/2022/10/27/thumbs/large/1793279.jpeg",
+  "bio": "hi",
+  "valid": true,
+  "admin": true
+}
 
 ###
-DELETE http://localhost:4000/users/662d20804c8ee243bfb281fe
+# Pour supprimer un user
+DELETE http://localhost:4000/users/delete/taylorswift13
 
 ### 
-PATCH http://localhost:4000/users/662d20804c8ee243bfb281fe
+# Pour modifier les champs d'un user 
+PATCH http://localhost:4000/users/edit/taylorswit13
 Content-Type: application/json
 
 {
@@ -30,18 +48,5 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:4000/users 
-Content-Type: application/json
-
-{
-  "name": "Carpenter",
-  "surname": "Sabrina",
-  "username": "taylorswift13",
-  "email": "taylorswift@gmail.com",
-  "password": "123456",
-  "cover": "https://pbs.twimg.com/profile_banners/1292851218159525889/1603637145/1500x500",
-  "photo": "https://apicms.thestar.com.my/uploads/images/2022/10/27/thumbs/large/1793279.jpeg",
-  "bio": "hi",
-  "valid": true,
-  "admin": true
-}
+# Obtenir l'ID d'un user avec son username
+GET http://localhost:4000/users/taylorswift13

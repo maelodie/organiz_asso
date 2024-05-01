@@ -27,26 +27,24 @@ const usersSchema = new mongoose.Schema({
     default: Date.now
   },
   cover: {
-    type: Buffer,
-    required: true,
+    type: String,
+    default: ""
 
   },
   photo: {
-    type: Buffer,
-    required: true,
+    type: String,
+    default: ""
   },
   bio: {
     type: String,
-    required: true,
+    default: ""
   },
   valid: {
     type: String,
-    required: true,
     default: false
   },
   admin: {
     type: String,
-    required: true,
     default: false
   }
 

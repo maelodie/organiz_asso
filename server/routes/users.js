@@ -26,13 +26,8 @@ router.post('/', async (req, res) => {
 })
 
 
-// getUser: permet d'afficher le user avec l'id userid
-router.get('/:id', getUser, (req, res) => {
-  res.json(res.user)
-})
-
 // deleteUser: permet de supprimer un utilisateur de la base de données users
-router.delete('/:id', getUser, async (req, res) => {
+router.delete('delete/:username', getUser, async (req, res) => {
   try {
     await res.user.deleteOne()
     res.json( { message: 'Utilisateur supprimé'})
@@ -52,7 +47,7 @@ router.get('/', async (req, res) => {
 })
 
 // updateUser: permet de modifier des informations sur un utilisateur
-router.patch('/:id', getUser, async (req, res) => {
+router.patch('/edit/:username', getUser, async (req, res) => {
   if (req.body.surname != null) {
     res.user.surname = req.body.surname
   }
@@ -76,19 +71,29 @@ router.patch('/:id', getUser, async (req, res) => {
   }
 })
 
-// middleware pour obtenir un utilisateur 
+// getUserbyUsername : obtenir l'ID d'un utilisateur avec son username
+router.get('/:username', getUser, async (req, res) => {
+  res.json(res.user)
+}) 
+
+// fonction pour obtenir l'ID d'un utilisateur en fonction de son username
 async function getUser(req, res, next) {
   let user
+  console.log(req.params.username)
   try {
-    user = await User.findById(req.params.id)
-    if (!user) {
-      return res.status(404).json({message : 'Utilisateur non trouvé'}) // user not found
+    const userDatabase = await User.findOne({ username: req.params.username });
+
+    if (!userDatabase) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    } else {
+      user = userDatabase;
+      res.user = userDatabase;
+      next(); 
     }
   } catch (err) {
-    return res.status(500).json({message : err.message})
+    return res.status(500).json({ message: err.message });
   }
-  res.user = user
-  next()
-}
+} 
+
 
 module.exports = router // renvoie le routeur à server.js
