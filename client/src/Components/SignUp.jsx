@@ -45,7 +45,11 @@ function SignUp() {
                     if(status == 201) {
                         setCurrentPage('Home');
                     }
+                    else if(status == 409) {
+                        alert("Les mot dt pas identiques");
+                    }
                     else {
+                        alert("else")
                         alert(JSON.stringify(response.data));
                     }
     

@@ -12,10 +12,16 @@ router.post('/', async (req, res) => {
     })
   
     try {
-      const newUser = await user.save()
-      res.status(201).json(newUser)
-    } catch(err) {
-      res.status(400).json({ message : err.message })
+        const user = await User.findOne({ username: username});
+        
+        if(user) {
+            res.status(409).json({ message : "Username existe déjà"});
+        }else{
+            const newUser = await user.save()
+            res.status(201).json(newUser)
+        }
+    }catch(err) {
+        res.status(500).json({ message : err.message })
     }
 })
   
