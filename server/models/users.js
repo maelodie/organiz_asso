@@ -28,16 +28,15 @@ const usersSchema = new mongoose.Schema({
   },
   cover: {
     type: Buffer,
-    required: true,
-
+    default: ''
   },
   photo: {
     type: Buffer,
-    required: true,
+    default: ''
   },
   bio: {
     type: String,
-    required: true,
+    default: ''
   },
   valid: {
     type: String,
@@ -48,9 +47,7 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: false
-  }
-
-  
+  } 
 })
 
 module.exports = mongoose.model('User', usersSchema) // pour intéragir avec le schema dans d'autres bases de données 

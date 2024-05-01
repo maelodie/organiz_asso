@@ -22,14 +22,10 @@ function Login() {
         
         axios.post('/login', credentials) 
         .then(response => {
-            const status = response.status;
-            if(status == 200) {
+            console.log("Successful login");
+            if(response.status == 200) {
                 setCurrentPage('Home');
             }
-            else {
-                alert(JSON.stringify(response.data));
-            }
-
         })
         .catch(error => {
             console.error('Erreur', error);
@@ -38,7 +34,7 @@ function Login() {
 
     return (
         <div>
-            {currentPage === 'Home' ? <Home /> : (
+            {currentPage === 'Home' ? <Home username = {username}/> : (
                 <div className='premier'>
                     <h1>Login</h1>
                     <form onSubmit={handleSubmit}>

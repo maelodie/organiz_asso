@@ -1,7 +1,8 @@
+# Pour obtenir tous les utilisateurs
 GET http://localhost:4000/users
 
 ###
-
+# Pour créer un utilisateur avec les champs minimums
 POST http://localhost:4000/users 
 Content-Type: application/json
 
@@ -14,25 +15,9 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:4000/users/662d20804c8ee243bfb281fe
-
-###
-DELETE http://localhost:4000/users/662d20804c8ee243bfb281fe
-
-### 
-PATCH http://localhost:4000/users/662d20804c8ee243bfb281fe
-Content-Type: application/json
-
-{
-  "name": "Grande",
-  "surname": "Ariana",
-  "username": "arianagrande"
-}
-
-###
+# Pour créer un utilisateur avec tous les champs requis
 POST http://localhost:4000/users 
 Content-Type: application/json
-
 {
   "name": "Carpenter",
   "surname": "Sabrina",
@@ -45,3 +30,22 @@ Content-Type: application/json
   "valid": true,
   "admin": true
 }
+
+###
+# Pour supprimer un user
+DELETE http://localhost:4000/users/delete/taylorswift13
+
+### 
+# Pour modifier les champs d'un user 
+PATCH http://localhost:4000/users/edit/taylorswit13
+Content-Type: application/json
+
+{
+  "name": "Grande",
+  "surname": "Ariana",
+  "username": "arianagrande"
+}
+
+###
+# Obtenir l'ID d'un user avec son username
+GET http://localhost:4000/users/taylorswift13

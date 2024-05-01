@@ -8,7 +8,7 @@ import Post from'./Post';
 import PostList from './PostList';
 import './Home.css';
 
-function Home() {
+function Home({username}) {
     const [currentPage, setCurrentPage] = React.useState(null);
 
     // Fonction pour naviguer vers la page Connexion
@@ -40,7 +40,7 @@ function Home() {
                     </div>
                     <div id="Feed">
                         <h1>Feed</h1>
-                        <TextBox/>
+                        <TextBox username={username}/>
                         <Post photo="https://apicms.thestar.com.my/uploads/images/2022/10/27/thumbs/large/1793279.jpeg" username="tayrianastan13" date="19-04-2024" text="eternal sunshine and TTPD area EATING" like="1989"/>
                         <Post/>
                         <PostList/>
