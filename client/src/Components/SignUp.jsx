@@ -39,24 +39,22 @@ function SignUp() {
                     "password": password
                 };
     
-                axios.post('/signup', credentials) 
+                // Client (React)
+
+                axios.post('/signup', credentials)
                 .then(response => {
                     const status = response.status;
-                    if(status == 201) {
+                    if (status === 201) {
                         setCurrentPage('Home');
+                    } else {
+                        alert(response.data.message || "Une erreur s'est produite lors de l'inscription.");
                     }
-                    else if(status == 409) {
-                        alert("Les mot dt pas identiques");
-                    }
-                    else {
-                        alert("else")
-                        alert(JSON.stringify(response.data));
-                    }
-    
                 })
                 .catch(error => {
                     console.error('Erreur', error);
+                    alert("Une erreur s'est produite lors de la communication avec le serveur.");
                 });
+
 
             }
     };
