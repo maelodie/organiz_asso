@@ -10,8 +10,6 @@ function PrivateForum({list}) {
                 <h1 id="title">Forum Privé</h1>
             </div>
             <div>
-                <Post photo="https://apicms.thestar.com.my/uploads/images/2022/10/27/thumbs/large/1793279.jpeg" username="tayrianastan13" date="19-04-2024" text="eternal sunshine and TTPD area EATING" like="1989"/>
-                <Post/>
                 <PostList list={list}/>
             </div>
         </div>

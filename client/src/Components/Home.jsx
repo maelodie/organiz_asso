@@ -5,7 +5,6 @@ import SearchBar from './SearchBar';
 import Profil from './Profil';
 import PrivateForum from './PrivateForum';
 import ValidateMember from'./ValidateMember';
-import { useState } from 'react';
 import TextBox from './TextBox';
 import Post from'./Post';
 import PostList from './PostList';
@@ -51,18 +50,17 @@ function Home({username}) {
     }, []);
 
     // Fonctions pour naviguer vers différentes pages
-    const goToProfil = () => setCurrentPage('Profil');
-    const goToPrivateForum = () => setCurrentPage('PrivateForum');
     const goToValidateMember = () => setCurrentPage('ValidateMember');
 
+    
     // Rendu conditionnel en fonction de la page actuelle
     return (
         <div>
             {currentPage === 'Profil' && <Profil cover={cover} photo={photo} username={user} bio={bio} />}
-            {currentPage === 'PrivateForum' && <PrivateForum  />}
+            {currentPage === 'PrivateForum' && <PrivateForum />}
             {currentPage === 'ValidateMember' && <ValidateMember />}
             {currentPage === null && (
-                <>
+                <div className="container">
                     <div className="Panel">
                         <h2>Navigation</h2>
                         <button onClick={goToProfil}>Profil</button>
@@ -71,14 +69,14 @@ function Home({username}) {
                     </div>
                     <div id="Feed">
                         <h1>Feed</h1>
-                        <TextBox username={username}/>
-                        <PostList list={posts} />
+                        <TextBox username = {username}/>
+                        <PostList/>
                     </div>
                     <div className="Panel">
                         <h2>Recherche</h2>
-                        <SearchBar />
+                        <SearchBar/>
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

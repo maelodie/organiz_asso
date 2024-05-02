@@ -11,7 +11,6 @@ function Profil({cover, photo, username, bio, list}) {
             <img src={photo} alt="photo"></img>
             <p id="user">{username}</p>
             <p>{bio}</p>
-            <Post photo={photo} username={username} date="19-04-2024" text="eternal sunshine and TTPD area EATING" like="1989"/>
         </div>
     )
 }
