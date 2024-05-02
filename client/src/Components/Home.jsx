@@ -13,10 +13,7 @@ axios.defaults.baseURL = 'http://localhost:4000'
 
 function Home({username}) {
     const [currentPage, setCurrentPage] = useState(null);
-    const [cover, setCover] = useState('');
-    const [photo, setPhoto] = useState('');
     const [user, setUser] = useState('');
-    const [bio, setBio] = useState('');
     const [posts, setPosts] = useState([]);
 
     // Fonction pour naviguer vers la page Connexion
@@ -24,10 +21,7 @@ function Home({username}) {
 
         axios.get(`/users/${username}`, {params: {username: username}})
         .then(response =>{
-            setCover(response.data.cover);
-            setPhoto(response.data.photo);
-            setUser(response.data.username);
-            setBio(response.data.bio);
+            setUser(response.data);
         })
         .catch(error =>{
             console.error('Erreur', error);
@@ -56,7 +50,7 @@ function Home({username}) {
     // Rendu conditionnel en fonction de la page actuelle
     return (
         <div>
-            {currentPage === 'Profil' && <Profil cover={cover} photo={photo} username={user} bio={bio} />}
+            {currentPage === 'Profil' && <Profil cover={user.cover} photo={user.photo} username={user.username} bio={user.bio} />}
             {currentPage === 'PrivateForum' && <PrivateForum />}
             {currentPage === 'ValidateMember' && <ValidateMember />}
             {currentPage === null && (
