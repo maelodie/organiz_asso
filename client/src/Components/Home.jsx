@@ -14,7 +14,6 @@ axios.defaults.baseURL = 'http://localhost:4000'
 function Home({ username }) {
     const navigate = useNavigate();
     const [user, setUser] = useState('');
-    const [posts, setPosts] = useState([]);
 
     // Fonction pour naviguer vers la page Connexion
     const goToProfil = () => {
@@ -30,15 +29,6 @@ function Home({ username }) {
         navigate(`/profile/${username}`);
     };
 
-    useEffect(() => {
-        axios.get('/posts')
-            .then(response => {
-                setPosts(response.data);
-            })
-            .catch(error => {
-                console.error('Erreur lors du chargement des publications :', error);
-            });
-    }, []);
 
     // Fonctions pour naviguer vers différentes pages
     const goToValidateMember = () => navigate('/validateMembers');

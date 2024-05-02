@@ -1,21 +1,33 @@
 import React from 'react';
 import "./PendingMember.css"
+import axios from 'axios';
+axios.defaults.baseURL = 'http://localhost:4000'
 
-function PendingMember({photo, username}) {
+function PendingMember({user}) {
 
     // Fonctions
     const Approve = () => {
-        //Code
+        const credentials = {
+            "valid": true,
+        };
+
+        axios.patch(`/users/edit/${user.username}`, credentials)
+        .catch(error => {
+            console.error('Erreur', error);
+        })
     };
 
     const Refuse = () => {
-        //Code
+        axios.delete(`/users/delete/${user.username}`)
+        .catch(error => {
+            console.error('Erreur', error);
+        })
     };
 
     return(
         <div id="validate">
-            <img id="pfp" src={photo} alt="logo"></img>
-            <p>{username}</p>
+            <img id="pfp" src={user.photo} alt="logo"></img>
+            <p>{user.username}</p>
             <button onClick={Approve}>ok</button>
             <button onClick={Refuse}>no</button>
         </div>

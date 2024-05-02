@@ -11,7 +11,8 @@ const usersSchema = new mongoose.Schema({
   }, 
   username: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   email: {
     type: String,
@@ -40,11 +41,11 @@ const usersSchema = new mongoose.Schema({
     default: ""
   },
   valid: {
-    type: String,
+    type: Boolean,
     default: false
   },
   admin: {
-    type: String,
+    type: Boolean,
     default: false
   } 
 })
