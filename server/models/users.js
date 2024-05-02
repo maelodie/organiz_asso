@@ -28,24 +28,23 @@ const usersSchema = new mongoose.Schema({
   },
   cover: {
     type: String,
-    default: ''
+    default: "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png"
+
   },
   photo: {
     type: String,
-    default: ''
+    default: "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg"
   },
   bio: {
     type: String,
-    default: ''
+    default: ""
   },
   valid: {
     type: String,
-    required: true,
     default: false
   },
   admin: {
     type: String,
-    required: true,
     default: false
   } 
 })

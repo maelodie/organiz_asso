@@ -34,7 +34,8 @@ function Login() {
 
     return (
         <div>
-            {currentPage === 'Home' ? <Home username = {username}/> : (
+
+            {currentPage === 'Home' ? <Home username={username} /> : (
                 <div className='premier'>
                     <h1>Login</h1>
                     <form onSubmit={handleSubmit}>
