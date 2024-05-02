@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Home from './Home'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:4000'
 
 function SignUp() {
 
-    const [currentPage, setCurrentPage] = React.useState(null);
+    const navigate = useNavigate()
 
     // State pour gérer les champs de formulaire
     const [firstName, setFirstName] = useState('');
@@ -14,38 +16,38 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    
+
     // Fonction pour soumettre le formulaire
     const handleSubmit = (event) => {
-            event.preventDefault();
-            // Comportement à coder
-            console.log('First Name:', firstName);
-            console.log('Last Name:', lastName);
-            console.log('Username:', username);
-            console.log('Email:', email);
-            console.log('Password:', password);
-            console.log('Confirm Password:', confirmPassword);
+        event.preventDefault();
+        // Comportement à coder
+        console.log('First Name:', firstName);
+        console.log('Last Name:', lastName);
+        console.log('Username:', username);
+        console.log('Email:', email);
+        console.log('Password:', password);
+        console.log('Confirm Password:', confirmPassword);
 
-            if(password!=confirmPassword){
-                alert("Les mot des passe ne sont pas identiques");
+        if (password != confirmPassword) {
+            alert("Les mot des passe ne sont pas identiques");
 
-            }else{
+        } else {
 
-                const credentials = {
-                    "surname": firstName,
-                    "name": lastName,
-                    "username": username,
-                    "email": email,
-                    "password": password
-                };
-    
-                // Client (React)
+            const credentials = {
+                "surname": firstName,
+                "name": lastName,
+                "username": username,
+                "email": email,
+                "password": password
+            };
 
-                axios.post('/signup', credentials)
+            // Client (React)
+
+            axios.post('/signup', credentials)
                 .then(response => {
                     const status = response.status;
                     if (status === 201) {
-                        setCurrentPage('Home');
+                        navigate('/home');
                     }
                 })
                 .catch(error => {
@@ -60,76 +62,71 @@ function SignUp() {
                 });
 
 
-            }
+        }
     };
-    
+
     return (
-        <div>
-            {currentPage === 'Home' ? <Home username={username} /> : (
-                <div className="premier">
-                    <h1>SignUp</h1>
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                        <input
-                            type="text"
-                            placeholder="Prénom"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            required
-                        />
-                        </div>
-                        <div>
-                        <input
-                            type="text"
-                            placeholder="Nom"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            required
-                        />
-                        </div>
-                        <div>
-                        <input
-                            type="text"
-                            placeholder="Nom d'utilisateur"
-                            value={username}
-                            onChange={(e) => setUSerName(e.target.value)}
-                            required
-                        />
-                        </div>
-                        <div>
-                        <input
-                            type="email"
-                            placeholder="Adresse e-mail"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                        </div>
-                        <div>
-                        <input
-                            type="password"
-                            placeholder="Mot de passe"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        </div>
-                        <div>
-                        <input
-                            type="password"
-                            placeholder="Confirmer le mot de passe"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
-                        </div>
-                        <button type="submit">S'inscrire</button>
-                    </form>
+        <div className="premier">
+            <h1>SignUp</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Prénom"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                    />
                 </div>
-            )}
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Nom"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Nom d'utilisateur"
+                        value={username}
+                        onChange={(e) => setUSerName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <input
+                        type="email"
+                        placeholder="Adresse e-mail"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <input
+                        type="password"
+                        placeholder="Mot de passe"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <input
+                        type="password"
+                        placeholder="Confirmer le mot de passe"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">S'inscrire</button>
+            </form>
         </div>
     );
 }
-    
+
 export default SignUp;
-    

@@ -1,39 +1,30 @@
-import React, { useEffect , useState} from 'react';
-import Login from './Components/Login'
-import SignUp from './Components/SignUp'
-import axios from 'axios'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './Components/Login';
+import SignUp from './Components/SignUp';
+import Start from './Components/Start'
+import Home from './Components/Home'
+import Profil from './Components/Profil';
+import PrivateForum from './Components/PrivateForum';
+import ValidateMember from './Components/ValidateMember';
 import './App.css'
 
-// port du server 
-axios.defaults.baseURL = 'http://localhost:4000'
 function App() {
-    const [currentPage, setCurrentPage] = React.useState(null);
-
-    // Fonction pour naviguer vers la page Login
-    const goToLogin = () => {
-        setCurrentPage('Login');
-    };
-
-    // Fonction pour naviguer vers la page SignUp
-    const goToSignUp = () => {
-        setCurrentPage('SignUp');
-    };
-
-     
-    
-    // Rendu conditionnel en fonction de la page actuelle
     return (
-        <div>
-            {currentPage === 'Login' && <Login />}
-            {currentPage === 'SignUp' && <SignUp />}
-            {currentPage === null && (
-                <div className="premier" >
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/LEGO_logo.svg" alt="logo"></img>
-                    <button onClick={goToLogin}>Login</button>
-                    <button onClick={goToSignUp}>SignUp</button>
-                </div>
-            )}
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" exact element={<Start />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+
+                <Route path='/home' element={<Home />} />
+
+                <Route path='/profile/:username' element={<Profil /> }/>
+                <Route path='/privateForum' element={<PrivateForum />} />
+                <Route path='/validateMembers' element={<ValidateMember />} />
+
+            </Routes>
+        </BrowserRouter>
     );
 }
 
