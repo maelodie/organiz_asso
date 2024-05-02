@@ -49,22 +49,22 @@ router.get('/', async (req, res) => {
 // updateUser: permet de modifier des informations sur un utilisateur
 router.patch('/edit/:username', getUser, async (req, res) => {
   if (req.body.surname != null) {
-    res.user.surname = req.body.surname
+    res.userData.surname = req.body.surname
   }
   if (req.body.name != null) {
-    res.user.name = req.body.name
+    res.userData.name = req.body.name
   }
   if (req.body.username != null) {
-    res.user.username = req.body.username
+    res.userData.username = req.body.username
   }
   if (req.body.email != null) {
-    res.user.email = req.body.email
+    res.userData.email = req.body.email
   }
   if (req.body.password != null) {
-    res.user.password = req.body.password
+    res.userData.password = req.body.password
   }
   try {
-    const updatedUser = await res.user.save()
+    const updatedUser = await req.userData.save()
     res.json(updatedUser)
   } catch (err) {
     res.status(400).send( { message: err.message })
