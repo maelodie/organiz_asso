@@ -27,9 +27,9 @@ router.post('/', async (req, res) => {
 
 
 // deleteUser: permet de supprimer un utilisateur de la base de données users
-router.delete('delete/:username', getUser, async (req, res) => {
+router.delete('/delete/:identifier', getUser, async (req, res) => {
   try {
-    await res.user.deleteOne()
+    await req.userData.deleteOne();
     res.json( { message: 'Utilisateur supprimé'})
   } catch(err) {
     res.status(500).json( { message: err.message })
@@ -47,27 +47,52 @@ router.get('/', async (req, res) => {
 })
 
 // updateUser: permet de modifier des informations sur un utilisateur
-router.patch('/edit/:username', getUser, async (req, res) => {
+router.patch('/edit/:identifier', getUser, async (req, res) => {
   if (req.body.surname != null) {
-    res.user.surname = req.body.surname
+    req.userData.surname = req.body.surname
   }
   if (req.body.name != null) {
-    res.user.name = req.body.name
+    req.userData.name = req.body.name
   }
   if (req.body.username != null) {
-    res.user.username = req.body.username
+    req.userData.username = req.body.username
   }
   if (req.body.email != null) {
-    res.user.email = req.body.email
+    req.userData.email = req.body.email
   }
   if (req.body.password != null) {
-    res.user.password = req.body.password
+    req.userData.password = req.body.password
+  }
+  if (req.body.cover != null) {
+    req.userData.cover = req.body.cover
+  }
+  if (req.body.photo != null) {
+    req.userData.photo = req.body.photo
+  }
+  if (req.body.bio != null) {
+    req.userData.bio = req.body.bio
+  }
+  if (req.body.valid != null) {
+    req.userData.valid = req.body.valid
+  }
+  if (req.body.admin != null) {
+    req.userData.admin = req.body.admin
   }
   try {
-    const updatedUser = await res.user.save()
-    res.json(updatedUser)
+    const updatedUser = await req.userData.save();
+    res.json(updatedUser);
   } catch (err) {
-    res.status(400).send( { message: err.message })
+    res.status(400).send({ message: err.message });
+  }
+})
+
+// getUser : obtenir les données d'un utilisateur avec son username
+router.get('/isNotValid', async (req, res) => {
+  try {
+    const users = await User.find({valid: false})
+    res.json(users)
+  } catch (err) {
+    res.status(500).json({ message : err.message})
   }
 })
 
@@ -111,5 +136,7 @@ async function getUserData(identifier) {
     throw new Error('Erreur lors de la récupération des données de l\'utilisateur : ' + error.message);
   }
 }
+
+
 
 module.exports = router // renvoie le routeur à server.js

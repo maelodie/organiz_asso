@@ -18,32 +18,32 @@ Content-Type: application/json
 # Pour créer un utilisateur avec tous les champs requis
 POST http://localhost:4000/users 
 Content-Type: application/json
+
 {
-  "name": "Carpenter",
-  "surname": "Sabrina",
-  "username": "taylorswift13",
+  "name": "maeva",
+  "surname": "moi",
+  "username": "immagetdeleeccfzefzfegrgtete",
   "email": "taylorswift@gmail.com",
   "password": "123456",
   "cover": "https://pbs.twimg.com/profile_banners/1292851218159525889/1603637145/1500x500",
   "photo": "https://apicms.thestar.com.my/uploads/images/2022/10/27/thumbs/large/1793279.jpeg",
   "bio": "hi",
-  "valid": true,
-  "admin": true
+  "valid": false,
+  "admin": false
 }
 
 ###
 # Pour supprimer un user
-DELETE http://localhost:4000/users/delete/taylorswift13
+DELETE http://localhost:4000/users/delete/ariana
 
 ### 
 # Pour modifier les champs d'un user 
-PATCH http://localhost:4000/users/edit/taylorswit13
+PATCH http://localhost:4000/users/edit/aaaaa
 Content-Type: application/json
 
 {
-  "name": "Grande",
-  "surname": "Ariana",
-  "username": "arianagrande"
+  "name": "NNNNNNNNNNNNNN",
+  "surname": "NNNNNNNNNNNNNNN"
 }
 
 ###
@@ -53,3 +53,8 @@ GET http://localhost:4000/users/663289f1097285bdf3e8c607
 ### 
 # Obtenir un user avec son ID
 GET http://localhost:4000/users/taylorswift13
+
+
+###
+# Obtenir la liste des utilisateurs non validés
+GET http://localhost:4000/users/isNotValid
