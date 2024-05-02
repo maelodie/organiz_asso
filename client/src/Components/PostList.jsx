@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Post from './Post'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:4000'
 
 function PostList({list}) {
-    //list est une liste de post, chaque post a les 4 infos nécessaire pour 'Post'
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        axios.get(`/posts/`)
+        .then(response => {
+            setPosts(response.data)
+        })
+        .catch(error => {
+            console.error('Erreur', error);
+        })
+    }, []);
+
     return(
-        //On fait un sort de for i in list,
-        //<Post i.username i.date i.text i.like
-        <h1>List de post à implémenter avec la bdd..</h1>
-    )
+        <div>
+            {posts.map(post => (
+                <Post key={post._id} post={post} />
+            ))}
+        </div>
+    );
 }
 
 export default PostList;

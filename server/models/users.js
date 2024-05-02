@@ -46,9 +46,7 @@ const usersSchema = new mongoose.Schema({
   admin: {
     type: String,
     default: false
-  }
-
-  
+  } 
 })
 
 module.exports = mongoose.model('User', usersSchema) // pour intéragir avec le schema dans d'autres bases de données 

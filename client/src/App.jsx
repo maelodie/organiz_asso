@@ -19,7 +19,7 @@ function App() {
         setCurrentPage('SignUp');
     };
 
-    // Envoyer un POST au serveur sur les informations de l'utilisateur 
+     
     
     // Rendu conditionnel en fonction de la page actuelle
     return (
