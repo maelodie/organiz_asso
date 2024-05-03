@@ -73,6 +73,16 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/post/:authorId', async (req, res) => {
+  try {
+    const authorId = req.params.authorId;
+    const posts = await getPostsByAuthorId(authorId);
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // fonction middleware pour trouver un message précis
 async function getPost(req, res, next) {
   let post
@@ -84,6 +94,17 @@ async function getPost(req, res, next) {
   }
   res.post = post
   next()
+}
+
+// Fonction pour récupérer la liste des messages postés par un utilisateur avec un ID donné
+async function getPostsByAuthorId(authorId) {
+  try {
+    // Recherche tous les messages qui ont l'auteur avec l'ID donné
+    const posts = await Post.find({ author: authorId });
+    return posts;
+  } catch (error) {
+    throw new Error('Erreur lors de la récupération des messages de l\'utilisateur : ' + error.message);
+  }
 }
 
 
