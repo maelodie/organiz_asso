@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Post.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
 function Post({ post, del }) {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
 
@@ -35,11 +37,15 @@ function Post({ post, del }) {
         })
     };
 
+    const GoToProfil = () => {
+        navigate(`/profilePrivate/${user.username}`, { state : { username : user.username} });
+    };
+
     return (
         <div className="post">
             <div id="upper">
                 <img id="pfp" src={user.photo} alt="pfp" />
-                <p>{user.username}</p>
+                <a href="" onClick={GoToProfil}><p>{user.username}</p></a>
                 <p>{post.sendingDate}</p>
                 {del && <button onClick={Delete}>X</button>}
             </div>
