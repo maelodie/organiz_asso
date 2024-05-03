@@ -11,8 +11,11 @@ function Profil() {
     const username = location.state.username;
     const [user, setUser] = useState('');
     const [posts, setPosts] = useState([]);
+    const [isEditing, setIsEditing] = useState(false); // État pour gérer l'édition
+    const [cover, setCover] = useState('');
+    const [photo, setPhoto] = useState('');
+    const [bio, setBio] = useState('');
 
-    // requête pour obtenir les informations sur une personne
     useEffect(() => {
         const token = localStorage.getItem("token");
         axios.get(`/users/${username}`, {
@@ -22,7 +25,9 @@ function Profil() {
         })
         .then(response => {
             setUser(response.data);
-            // Récupération des posts une fois que les informations utilisateur sont obtenues
+            setCover(response.data.cover);
+            setPhoto(response.data.photo);
+            setBio(response.data.bio);
             axios.get(`/posts/post/${response.data._id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -38,9 +43,31 @@ function Profil() {
         .catch(error => {
             console.error('Erreur lors de la récupération des informations utilisateur', error);
         });
-    }, [username]); // Assurez-vous que le useEffect se déclenche à chaque changement de username
-    
-    
+    }, [username]);
+
+    const handleEdit = () => {
+        setIsEditing(true);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        try {
+            const response = await axios.patch(`/users/edit/${user._id}`, {
+                cover,
+                photo,
+                bio
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setIsEditing(false);
+            setUser(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour du profil', error);
+        }
+    };
 
     return (
         <div>
@@ -48,6 +75,16 @@ function Profil() {
             <img src={user.photo} alt="photo"></img>
             <p id="user">{username}</p>
             <p>{user.bio}</p>
+            {isEditing ? (
+                <form onSubmit={handleSubmit}>
+                    <input type="text" value={cover} onChange={(e) => setCover(e.target.value)} />
+                    <input type="text" value={photo} onChange={(e) => setPhoto(e.target.value)} />
+                    <textarea value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
+                    <button type="submit">Enregistrer</button>
+                </form>
+            ) : (
+                <button onClick={handleEdit}>Modifier</button>
+            )}
             {posts.map(postx => (
                 <Post post={postx} />
             ))}
