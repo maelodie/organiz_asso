@@ -24,7 +24,7 @@ function HomeAdmin() {
     }
     
     const goToPrivateForum = () => navigate('/privateForum');
-    const goToAdminStatus = () => navigate('/adminStatus');
+    const goToAdminStatus = () => navigate('/adminStatus', { state : { username : username} });
 
     return (
 

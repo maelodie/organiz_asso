@@ -93,7 +93,7 @@ router.patch('/edit/:identifier', getUser, async (req, res) => {
   }
 })
 
-// getUser : obtenir les données d'un utilisateur avec son username
+// 
 router.get('/valid/no', async (req, res) => {
   try {
     const users = await User.find({valid: false})
