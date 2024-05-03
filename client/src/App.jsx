@@ -8,6 +8,8 @@ import Home from './Components/Home'
 import Profil from './Components/Profil';
 import PrivateForum from './Components/PrivateForum';
 import ValidateMember from './Components/ValidateMember';
+import WaitingRoom from './Components/WaitingRoom';
+import HomeAdmin from './Components/HomeAdmin';
 import './App.css'
 
 function App() {
@@ -21,7 +23,9 @@ function App() {
 
                 {/* Vérifiez si user est défini avant de passer le nom d'utilisateur */}
                 <Route path='/home' element={<Home />} />
+                <Route path='/homeAdmin' element={<HomeAdmin />} />
 
+                <Route path='/waitingRoom' element={<WaitingRoom />} />
                 <Route path='/profile/:username' element={<Profil />} />
                 <Route path='/privateForum' element={<PrivateForum />} />
                 <Route path='/validateMembers' element={<ValidateMember />} />

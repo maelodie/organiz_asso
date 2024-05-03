@@ -38,7 +38,7 @@ function SignUp() {
                 .then(response => {
                     const status = response.status;
                     if (status === 201) {
-                        navigate('/home', { state : { username : username} } );
+                        navigate('/waitingRoom');
                     }
                 })
                 .catch(error => {

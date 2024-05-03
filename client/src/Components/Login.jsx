@@ -20,11 +20,34 @@ function Login() {
         };
 
         try {
+
             const response = await axios.post('/auth/login', credentials);
             if (response.status === 200) {
                 localStorage.setItem("token", response.data.token) // on store le token localement 
-                navigate('/home', { state : { username : username} } ); // Rediriger l'utilisateur vers la page d'accueil
+
+
+                const token = localStorage.getItem("token");
+                axios.get(`/users/${username}`, { headers: { Authorization: `Bearer ${token}` }})
+                .then(response => {
+                    if(response.data.valid==false){
+                        navigate('/waitingRoom');       //Utilisateur non validé, donc vers la salle d'attente
+                    }
+                    else{
+                        if(response.data.admin==false){
+                            navigate('/home', { state : { username : username} } ); // Rediriger l'utilisateur vers la page d'accueil normal
+                        }
+                        else{
+                            navigate('/homeAdmin', { state : { username : username} } ); // Rediriger l'utilisateur vers la page d'accueil admin
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des informations utilisateur', error);
+                });
+
+
             }
+
         } catch (error) {
             console.error('Erreur', error);
         }
