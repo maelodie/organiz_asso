@@ -7,6 +7,7 @@ axios.defaults.baseURL = 'http://localhost:4000'
 function TextBox({username}){
     // State pour gérer les champs de formulaire
     const [text, setText] = useState('');
+    const token = localStorage.getItem("token");
     let id;
 
     // Gestion de la soumission
@@ -16,7 +17,10 @@ function TextBox({username}){
     
         try {
             // On prend d'abord l'ID de l'utilisateur 
-            const response = await axios.get(`/users/${username}`, { params: { username: username } });
+            const response = await axios.get(`/users/${username}`, {
+                params: { username: username }, // Inclure les paramètres pour passer le nom d'utilisateur
+                headers: { Authorization: `Bearer ${token}`}
+            });
             const id = response.data._id;
     
             // On utilise l'id de l'utilisateur pour créer un nouveau message
@@ -27,7 +31,11 @@ function TextBox({username}){
             console.log(newMessage);
     
             // Envoi du nouveau message
-            const postResponse = await axios.post('/posts/', newMessage);
+            const postResponse = await axios.post('/posts/', newMessage, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+            });
             if(postResponse.status === 201) {
                 console.log("Le message a bien été créé");
             }

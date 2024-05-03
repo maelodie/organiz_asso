@@ -6,9 +6,14 @@ axios.defaults.baseURL = 'http://localhost:4000'
 
 function PostList() {
     const [posts, setPosts] = useState([]);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
-        axios.get(`/posts/`)
+        axios.get(`/posts/`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+        })
         .then(response => {
             setPosts(response.data)
         })
@@ -20,7 +25,7 @@ function PostList() {
     return(
         <div>
             {posts.map(post => (
-                <Post key={post._id} post={post} />
+                <Post post={post} />
             ))}
         </div>
     );

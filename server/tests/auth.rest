@@ -22,7 +22,6 @@ Content-Type:  application/json
 }
 
 ###
-
 # Cette requête permet de récupérer les données à propos de l'utilisateur connecté
 GET http://localhost:4000/users/user1
 authorization : Bearer 

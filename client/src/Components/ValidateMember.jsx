@@ -10,7 +10,11 @@ function ValidateMember() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get(`/users/isNotValid`)
+        axios.get(`/users/isNotValid`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
         .then(response => {
             setUsers(response.data)
         })

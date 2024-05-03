@@ -6,16 +6,21 @@ axios.defaults.baseURL = 'http://localhost:4000'
 
 function Post({ post }) {
     const [user, setUser] = useState(null);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
         if (post.author) {
-            axios.get(`users/${post.author}`)
-                .then(response => {
-                    setUser(response.data);
-                })
-                .catch(error => {
-                    console.error('Erreur', error);
-                });
+            axios.get(`users/${post.author}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                setUser(response.data);
+            })
+            .catch(error => {
+                console.error('Erreur', error);
+            });
         }
     }, [post.author]);
 

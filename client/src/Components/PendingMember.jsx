@@ -3,7 +3,10 @@ import "./PendingMember.css"
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:4000'
 
+
 function PendingMember({user}) {
+
+    const token = localStorage.getItem("token");
 
     // Fonctions
     const Approve = () => {
@@ -11,14 +14,22 @@ function PendingMember({user}) {
             "valid": true,
         };
 
-        axios.patch(`/users/edit/${user.username}`, credentials)
+        axios.patch(`/users/edit/${user.username}`, credentials, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+        })
         .catch(error => {
             console.error('Erreur', error);
         })
     };
 
     const Refuse = () => {
-        axios.delete(`/users/delete/${user.username}`)
+        axios.delete(`/users/delete/${user.username}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+        })
         .catch(error => {
             console.error('Erreur', error);
         })
