@@ -4,7 +4,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
-function Post({ post }) {
+function Post({ post, del }) {
     const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
 
@@ -41,7 +41,7 @@ function Post({ post }) {
                 <img id="pfp" src={user.photo} alt="pfp" />
                 <p>{user.username}</p>
                 <p>{post.sendingDate}</p>
-                <button onClick={Delete}>X</button>
+                {del && <button onClick={Delete}>X</button>}
             </div>
             <div id="text">
                 <p>{post.message}</p>

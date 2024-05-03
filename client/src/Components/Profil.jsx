@@ -86,7 +86,7 @@ function Profil() {
                 <button onClick={handleEdit}>Modifier</button>
             )}
             {posts.map(postx => (
-                <Post post={postx} />
+                <Post post={postx} del={true} />
             ))}
         </div>
     );
