@@ -94,9 +94,18 @@ router.patch('/edit/:identifier', getUser, async (req, res) => {
 })
 
 // getUser : obtenir les données d'un utilisateur avec son username
-router.get('/isNotValid', async (req, res) => {
+router.get('/valid/no', async (req, res) => {
   try {
     const users = await User.find({valid: false})
+    res.json(users)
+  } catch (err) {
+    res.status(500).json({ message : err.message})
+  }
+})
+
+router.get('/valid/yes', async (req, res) => {
+  try {
+    const users = await User.find({valid: true})
     res.json(users)
   } catch (err) {
     res.status(500).json({ message : err.message})

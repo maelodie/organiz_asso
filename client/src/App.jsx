@@ -10,6 +10,7 @@ import PrivateForum from './Components/PrivateForum';
 import ValidateMember from './Components/ValidateMember';
 import WaitingRoom from './Components/WaitingRoom';
 import HomeAdmin from './Components/HomeAdmin';
+import ValidateAdmin from './Components/ValidateAdmin';
 import './App.css'
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                 <Route path='/profile/:username' element={<Profil />} />
                 <Route path='/privateForum' element={<PrivateForum />} />
                 <Route path='/validateMembers' element={<ValidateMember />} />
+                <Route path='/adminStatus' element={<ValidateAdmin />} />
             </Routes>
         </BrowserRouter>
     );

@@ -24,6 +24,7 @@ function HomeAdmin() {
     }
     
     const goToPrivateForum = () => navigate('/privateForum');
+    const goToAdminStatus = () => navigate('/adminStatus');
 
     return (
 
@@ -33,6 +34,7 @@ function HomeAdmin() {
                 <button onClick={goToProfil}>Profil</button>
                 <button onClick={goToPrivateForum}>Forum Privé</button>
                 <button onClick={goToValidateMember}>Validation Membre</button>
+                <button onClick={goToAdminStatus}>Changement admin</button>
             </div>
             <div id="Feed">
                 <h1>Feed</h1>
