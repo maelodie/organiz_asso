@@ -73,6 +73,16 @@ router.get('/', async (req, res) => {
   }
 })
 
+// Suppression d'un post existant
+router.delete('/delete/:id', getPost, async (req, res) => {
+  try {
+    await req.post.deleteOne();
+    res.json({ message: 'Post supprimé avec succès' });
+  } catch(err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.get('/post/:authorId', async (req, res) => {
   try {
     const authorId = req.params.authorId;
@@ -92,7 +102,7 @@ async function getPost(req, res, next) {
   } catch (err) {
   return res.status(500).json({ message: err.message})
   }
-  res.post = post
+  req.post = post
   next()
 }
 

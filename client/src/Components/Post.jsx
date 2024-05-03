@@ -28,12 +28,20 @@ function Post({ post }) {
         return;
     }
 
+    const Delete = () => {
+        axios.delete(`/posts/delete/${post._id}`, { headers: { Authorization: `Bearer ${token}` }})
+        .catch(error => {
+            console.error('Erreur', error);
+        })
+    };
+
     return (
         <div className="post">
             <div id="upper">
                 <img id="pfp" src={user.photo} alt="pfp" />
                 <p>{user.username}</p>
-                <p>{post.date}</p>
+                <p>{post.sendingDate}</p>
+                <button onClick={Delete}>X</button>
             </div>
             <div id="text">
                 <p>{post.message}</p>
