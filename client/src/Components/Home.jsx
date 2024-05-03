@@ -1,42 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Home.css';
 import axios from 'axios';
 import SearchBar from './SearchBar';
-import Profil from './Profil';
-import PrivateForum from './PrivateForum';
-import ValidateMember from './ValidateMember';
 import TextBox from './TextBox';
 import PostList from './PostList';
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
-function Home({ username }) {
+function Home() {
     const navigate = useNavigate();
-    const [user, setUser] = useState('');
-
-    // Fonction pour naviguer vers la page Connexion
+    const location = useLocation();
+    // fetch username depuis la page de login
+    const username = location.state.username
+    // Fonction pour naviguer vers la page Profil
     const goToProfil = () => {
-
-        axios.get(`/users/${username}`, { params: { username: username } })
-            .then(response => {
-                setUser(response.data);
-                
-            })
-            .catch(error => {
-                console.error('Erreur', error);
-            })
-        navigate(`/profile/${username}`);
+        navigate(`/profile/${username}`, { state : { username : username} });
     };
-
 
     // Fonctions pour naviguer vers différentes pages
     const goToValidateMember = () => navigate('/validateMembers');
     const goToPrivateForum = () => navigate('/privateForum');
 
-
-
-    // Rendu conditionnel en fonction de la page actuelle
     return (
 
         <div className="container">
@@ -48,7 +33,7 @@ function Home({ username }) {
             </div>
             <div id="Feed">
                 <h1>Feed</h1>
-                <TextBox username={username} />
+                <TextBox username={username } />
                 <PostList />
             </div>
             <div className="Panel">

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Home from './Home'
-import axios from 'axios'
+import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:4000';
 
 function Login() {
     const navigate = useNavigate();
@@ -13,23 +12,22 @@ function Login() {
     const [password, setPassword] = useState('');
 
     // Fonction pour soumettre le formulaire
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const credentials = {
             "username": username,
             "password": password
         };
 
-        axios.post('/login', credentials)
-            .then(response => {
-                console.log("Successful login");
-                if (response.status == 200) {
-                    navigate('/home')
-                }
-            })
-            .catch(error => {
-                console.error('Erreur', error);
-            });
+        try {
+            const response = await axios.post('/auth/login', credentials);
+            if (response.status === 200) {
+                localStorage.setItem("token", response.data.token) // on store le token localement 
+                navigate('/home', { state : { username : username} } ); // Rediriger l'utilisateur vers la page d'accueil
+            }
+        } catch (error) {
+            console.error('Erreur', error);
+        }
     };
 
     return (

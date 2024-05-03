@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import Start from './Components/Start'
@@ -10,6 +11,7 @@ import ValidateMember from './Components/ValidateMember';
 import './App.css'
 
 function App() {
+
     return (
         <BrowserRouter>
             <Routes>
@@ -17,12 +19,12 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
 
+                {/* Vérifiez si user est défini avant de passer le nom d'utilisateur */}
                 <Route path='/home' element={<Home />} />
 
-                <Route path='/profile/:username' element={<Profil /> }/>
+                <Route path='/profile/:username' element={<Profil />} />
                 <Route path='/privateForum' element={<PrivateForum />} />
                 <Route path='/validateMembers' element={<ValidateMember />} />
-
             </Routes>
         </BrowserRouter>
     );

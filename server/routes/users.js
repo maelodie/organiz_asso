@@ -1,27 +1,34 @@
+require('dotenv').config(); // pour récupérer les données de .env
 const express = require('express')
 const router = express.Router()
 const User = require('../models/users') // pour reprendre le schema
+const { authenticateJWT , encryptMDP }  = require('../middlewares/authentication')
+
+// pour protéger les requêtes suivantes (il faut que l'utilisateur soit connecté)
+router.use(authenticateJWT);
 
 // createUser: créer un nouvel utilisateur
 router.post('/', async (req, res) => {
-  const user = new User({
-    surname: req.body.surname,
-    name: req.body.name,
-    username: req.body.username, 
-    email: req.body.email,
-    password: req.body.password,
-    cover: req.body.cover,
-    photo: req.body.photo,
-    bio: req.body.bio,
-    valid: req.body.valid,
-    admin: req.body.admin
-  })
+  const { surname, name, username, email, password, cover, photo, bio, valid, admin } = req.body;
+
+  // On vérifie d'abord si l'utilisateur existe déjà (et on ne crée rien dans ce cas)
+  const existingUser = await User.findOne({ username });
+  if (existingUser) res.status(409).json({ message: "Ce nom d'utilisateur est déjà utilisé." })
+
+  // On regarde si tous les champs sont complets
+  if (!surname || !name || !username || !email || !password) {
+    return res.status(400).json({ message: "Remplir les champs obligatoires." });
+  }
+
+  // On encrypte le mot de passe tapé par l'utilisateur et on crée un nouvel User avec les données à sauvegarder
+  const hashedMDP = await encryptMDP(10, password);
+  const newUser = new User({ surname, name, username, email, hashedMDP, cover, photo, bio, valid, admin });
 
   try {
-    const newUser = await user.save()
-    res.status(201).json(newUser)
-  } catch(err) {
-    res.status(400).json({ message : err.message })
+    const savedUser = await newUser.save();
+    res.status(201).json(savedUser);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur serveur" });
   }
 })
 
@@ -137,6 +144,7 @@ async function getUserData(identifier) {
   }
 }
 
+// Middleware d'authentification JWT
 
 
 module.exports = router // renvoie le routeur à server.js

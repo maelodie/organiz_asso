@@ -1,0 +1,33 @@
+# Cette requête permet de créer et d'inscrire un nouvel utilisateur au site
+POST http://localhost:4000/auth/signup
+Content-Type: application/json
+
+{
+  "name": "name3",
+  "surname": "surname3",
+  "username": "user3",
+  "email": "user1@gmail.com",
+  "password": "user3"
+}
+
+###
+
+# Cette requête permet de connecter un utilisateur grâce à un token
+POST http://localhost:4000/auth/login 
+Content-Type:  application/json
+
+{
+  "username": "user1",
+  "password": "user1"
+}
+
+###
+
+# Cette requête permet de récupérer les données à propos de l'utilisateur connecté
+GET http://localhost:4000/users/user1
+authorization : Bearer 
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwicGFzc3dvcmQiOiJ1c2VyMSIsImlhdCI6MTcxNDcxMjcwNSwiZXhwIjoxNzE0NzE2MzA1fQ.QeJN6nDi1wp4_zqVigmRuWKNy7OlRHA07gNa4gmTUo0
+
+###
+
+GET http://localhost:4000/test-session

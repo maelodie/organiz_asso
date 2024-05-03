@@ -18,7 +18,7 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  password: {
+  hashedMDP: {
     type: String,
     required: true
   },

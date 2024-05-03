@@ -20,13 +20,6 @@ function SignUp() {
     // Fonction pour soumettre le formulaire
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Comportement à coder
-        console.log('First Name:', firstName);
-        console.log('Last Name:', lastName);
-        console.log('Username:', username);
-        console.log('Email:', email);
-        console.log('Password:', password);
-        console.log('Confirm Password:', confirmPassword);
 
         if (password != confirmPassword) {
             alert("Les mot des passe ne sont pas identiques");
@@ -41,9 +34,7 @@ function SignUp() {
                 "password": password
             };
 
-            // Client (React)
-
-            axios.post('/signup', credentials)
+            axios.post('auth/signup', credentials)
                 .then(response => {
                     const status = response.status;
                     if (status === 201) {
