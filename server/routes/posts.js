@@ -42,19 +42,26 @@ router.post('/:username', async (req, res) => {
 
 // modification d'un post existant
 router.patch('/:id', getPost, async (req, res) => {
-  if (req.body.message != null) {
-    res.post.message = req.body.message
-  }
-
   if (req.body.author != null) {
-    return res.status(400).json({ message: "Changement de l'auteur interdit" });
+    req.post.author = req.body.author
   }
-
+  if (req.body.message != null) {
+    req.post.message = req.body.message
+  }
+  if (req.body.likes != null) {
+    req.post.likes = req.body.likes
+  }
+  if (req.body.sendingDate != null) {
+    req.post.sendingDate = req.body.sendingDate
+  }
+  if (req.body.aswers != null) {
+    req.post.aswers = req.body.aswers
+  }
   try {
-    const updatedPost = await res.post.save()
-    res.json(updatedPost)
+    const updatedPost = await req.post.save();
+    res.json(updatedPost);
   } catch (err) {
-    res.status(400).send( {message : err.message} )
+    res.status(400).send({ message: err.message });
   }
 })
 

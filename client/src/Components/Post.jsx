@@ -41,6 +41,32 @@ function Post({ post, del }) {
         navigate(`/profilePrivate/${user.username}`, { state : { username : user.username} });
     };
 
+    const Like = () => {
+        // Obtention de la valeur actuelle des likes
+        const currentLikes = post.likes;
+        console.log(currentLikes);
+
+        // Mise à jour locale de la valeur des likes (incrémentation)
+        const updatedLikes = currentLikes + 1;
+        console.log(updatedLikes);
+
+        // Préparation des données à envoyer dans la requête PATCH
+        const credentials = {
+            likes: updatedLikes
+        };
+        console.log(credentials);
+        
+
+        axios.patch(`/posts/${post._id}`, credentials, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+        })
+        .catch(error => {
+            console.error('Erreur', error);
+        })
+    };
+
     return (
         <div className="post">
             <div id="upper">
@@ -53,7 +79,7 @@ function Post({ post, del }) {
                 <p>{post.message}</p>
             </div>
             <div>
-                <p>{post.likes} likes ❤️</p>
+                <p>{post.likes} likes <a href="" onClick={Like}>❤️</a></p>
             </div>
         </div>
     );
