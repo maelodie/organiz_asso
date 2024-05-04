@@ -13,36 +13,30 @@ function SearchResults() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      console.log(query)
       try {
-        axios.get('/posts/post/search', {
-          params: query,
+        const response = await axios.post('/posts/post/search', query, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
-        })
-        .then( response => {
-          console.log(response.data)
-          setPosts(response.data); // Mise à jour de l'état des messages avec les données de la réponse
-        })
-        .catch(error => {
-          console.error('Erreur', error);
         });
+        setPosts(response.data); // Mise à jour de l'état des messages avec les données de la réponse
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error('Erreur', error);
       }
     };
     fetchPosts(); // Appel de la fonction d'asynchrone
-  }, [posts]);
+  }, [query, token]); // Effectue l'appel seulement si query ou token change
 
   console.log(posts.length)
+  console.log(posts);
 
   return (
     <div>
+      <h1>Recherche{query} </h1>
       {
         posts.slice().reverse().map(postx => (
-          <Post key={postx._id} post={postx} />
+          <Post post={postx} del={false} />
         ))
       }
     </div>
