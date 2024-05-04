@@ -38,6 +38,7 @@ function TextBox({username}){
             });
             if(postResponse.status === 201) {
                 console.log("Le message a bien été créé");
+                setText("");
             }
         } catch (error) {
             console.error('Erreur', error);
