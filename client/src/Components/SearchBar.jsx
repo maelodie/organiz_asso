@@ -12,11 +12,11 @@ function SearchBar() {
     const [searchResults, setSearchResults] = useState([]);
     const token = localStorage.getItem('token');
     let author;
-
+    
     const handleSearch = async () => {
         try {
             if (username) {
-                axios.get(`/users/${username}`, { headers: { Authorization: `Bearer ${token}` } })
+                await axios.get(`/users/${username}`, { headers: { Authorization: `Bearer ${token}` } })
                     .then(res => {
                         if (res.data) {
                             author = res.data._id
@@ -26,8 +26,8 @@ function SearchBar() {
                         console.error("erreur lors de la recherche de l'ID de l'utilisateur", err);
                     });
             }
-
-            const query = JSON.stringify({
+            
+            const query =  JSON.stringify({
                 keyword: keyword,
                 author: author,
                 startDate : startDate,

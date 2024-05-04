@@ -33,7 +33,7 @@ function SearchResults() {
 
   return (
     <div>
-      <h1>Recherche{query} </h1>
+      <h2>Recherche{query} </h2>
       {
         posts.slice().reverse().map(postx => (
           <Post post={postx} del={false} />
