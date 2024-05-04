@@ -11,6 +11,7 @@ import WaitingRoom from './Components/WaitingRoom';
 import HomeAdmin from './Components/HomeAdmin';
 import ValidateAdmin from './Components/ValidateAdmin';
 import ProfilPrivate from './Components/ProfilPrivate';
+import SearchResults from './Components/SearchResults'
 import './App.css'
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/privateForum' element={<PrivateForum />} />
                 <Route path='/validateMembers' element={<ValidateMember />} />
                 <Route path='/adminStatus' element={<ValidateAdmin />} />
+                <Route path='/search' element={<SearchResults />} />
             </Routes>
         </BrowserRouter>
     );

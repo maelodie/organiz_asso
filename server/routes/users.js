@@ -4,7 +4,7 @@ const router = express.Router()
 const User = require('../models/users') // pour reprendre le schema
 const { authenticateJWT , encryptMDP }  = require('../middlewares/authentication')
 
-
+router.use(authenticateJWT)
 
 // createUser: créer un nouvel utilisateur
 router.post('/', async (req, res) => {
@@ -151,8 +151,6 @@ async function getUserData(identifier) {
     throw new Error('Erreur lors de la récupération des données de l\'utilisateur : ' + error.message);
   }
 }
-
-// Middleware d'authentification JWT
 
 
 module.exports = router // renvoie le routeur à server.js

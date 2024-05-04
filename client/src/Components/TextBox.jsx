@@ -8,7 +8,6 @@ function TextBox({username}){
     // State pour gérer les champs de formulaire
     const [text, setText] = useState('');
     const token = localStorage.getItem("token");
-    let id;
 
     // Gestion de la soumission
     const handleSubmit = async (e) => {
