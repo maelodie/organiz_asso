@@ -4,7 +4,7 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
-function TextBox({username}){
+function PrivateTextBox({username}){
     // State pour gérer les champs de formulaire
     const [text, setText] = useState('');
     const token = localStorage.getItem("token");
@@ -27,7 +27,7 @@ function TextBox({username}){
             const newMessage = { 
                 "author": id,
                 "message": text,
-                "privacy": false
+                "privacy": true
             };
             console.log(newMessage);
     
@@ -62,4 +62,4 @@ function TextBox({username}){
     )
 }
 
-export default TextBox;
+export default PrivateTextBox;

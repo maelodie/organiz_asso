@@ -10,6 +10,11 @@ const answerSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  privacy: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   likes: {
     type: Number,
     default: 0
@@ -30,6 +35,11 @@ const postsSchema = new mongoose.Schema({
   message: {
     type: String,
     required: true
+  },
+  privacy: {
+    type: Boolean,
+    required: true,
+    default: false
   },
   likes: {
     type: Number,

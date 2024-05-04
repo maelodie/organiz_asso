@@ -1,0 +1,102 @@
+[
+  {
+    "author": "66363a581d03926dceede71c",
+    "message": "The sky is clear today.",
+    "privacy": false
+  },
+  {
+    "author": "66363abb1d03926dceede71f",
+    "message": "Just finished reading a great book!",
+    "privacy": false
+  },
+  {
+    "author": "66363aca1d03926dceede722",
+    "message": "Working hard on a new project.",
+    "privacy": false
+  },
+  {
+    "author": "66363ae11d03926dceede725",
+    "message": "Looking forward to the weekend.",
+    "privacy": false
+  },
+  {
+    "author": "66363af31d03926dceede728",
+    "message": "Enjoying a cup of coffee.",
+    "privacy": false
+  },
+  {
+    "author": "66363afe1d03926dceede72b",
+    "message": "Feeling grateful for the little things.",
+    "privacy": false
+  },
+  {
+    "author": "66363b041d03926dceede72e",
+    "message": "Just went for a jog in the park.",
+    "privacy": false
+  },
+  {
+    "author": "66363b161d03926dceede731",
+    "message": "Planning a trip for the summer.",
+    "privacy": false
+  },
+  {
+    "author": "66363a581d03926dceede71c",
+    "message": "Admin message: Important announcement for all users.",
+    "privacy": true
+  },
+  {
+    "author": "66363abb1d03926dceede71f",
+    "message": "Admin message: Server maintenance scheduled for tonight.",
+    "privacy": true
+  },
+  {
+    "author": "66363aca1d03926dceede722",
+    "message": "Admin message: New feature rollout next week.",
+    "privacy": true
+  },
+  {
+    "author": "66363ae11d03926dceede725",
+    "message": "Admin message: Security update required for all accounts.",
+    "privacy": true
+  },
+  {
+    "author": "66363af31d03926dceede728",
+    "message": "Admin message: Reminder to complete your profile.",
+    "privacy": true
+  },
+  {
+    "author": "66363afe1d03926dceede72b",
+    "message": "Admin message: Holiday schedule for the company.",
+    "privacy": true
+  },
+  {
+    "author": "66363b041d03926dceede72e",
+    "message": "Admin message: Training session for new users.",
+    "privacy": true
+  },
+  {
+    "author": "66363b161d03926dceede731",
+    "message": "Admin message: Feedback survey coming soon.",
+    "privacy": true
+  },
+  {
+    "author": "66363a581d03926dceede71c",
+    "message": "Another sunny day!",
+    "privacy": false
+  },
+  {
+    "author": "66363abb1d03926dceede71f",
+    "message": "Trying out a new recipe for dinner.",
+    "privacy": false
+  },
+  {
+    "author": "66363aca1d03926dceede722",
+    "message": "Watching my favorite movie tonight.",
+    "privacy": false
+  },
+  {
+    "author": "66363ae11d03926dceede725",
+    "message": "Just finished a good book.",
+    "privacy": false
+  }
+]

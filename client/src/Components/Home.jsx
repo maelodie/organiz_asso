@@ -11,8 +11,7 @@ axios.defaults.baseURL = 'http://localhost:4000'
 function Home() {
     const navigate = useNavigate();
     const location = useLocation();
-    // fetch username depuis la page de login
-    const username = location.state.username
+    const username = location.state.username // fetch username depuis la page de login
     // Fonction pour naviguer vers la page Profil
     const goToProfil = () => {
         navigate(`/profile/${username}`, { state : { username : username} });
