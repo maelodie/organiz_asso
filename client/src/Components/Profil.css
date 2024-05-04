@@ -1,0 +1,17 @@
+#couverture {
+    width: 100%;
+    max-height: 300px; /* Vous pouvez ajuster cette valeur selon vos besoins */
+    object-fit: cover; /* Pour que l'image couvre la zone en conservant ses proportions */
+    border-radius: 0%; /* Pour une forme circulaire */
+    margin: 10px;
+}
+
+
+p{
+    margin-left: 20px;
+}
+
+#user{
+    font-weight: bold; /* Met le texte en gras */
+    font-size: 24px; /* Définit la taille de la police à 24 pixels */
+}

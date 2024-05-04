@@ -1,0 +1,154 @@
+[
+  {
+    "_id": {
+      "$oid": "66363a581d03926dceede71c"
+    },
+    "surname": "Doe",
+    "name": "John",
+    "username": "johndoe",
+    "email": "john.doe@gmail.com",
+    "hashedMDP": "$2b$10$1JK0jdWgBuiOqbK7R.4DjOd50cp9IIWzJvfrFwL1atTTAiLqTuj2y",
+    "cover": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
+    "photo": "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    "bio": "",
+    "valid": true,
+    "admin": false,
+    "subscriptionDate": {
+      "$date": "2024-05-04T13:38:32.903Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "66363abb1d03926dceede71f"
+    },
+    "surname": "Smith",
+    "name": "Alice",
+    "username": "alicesmith",
+    "email": "alice.smith@example.com",
+    "hashedMDP": "$2b$10$vF/V.CsOshEvp30CuTkr2uEJRlOv1JOOt6tz2mBEBBHgUJXphGUt6",
+    "cover": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
+    "photo": "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    "bio": "",
+    "valid": true,
+    "admin": false,
+    "subscriptionDate": {
+      "$date": "2024-05-04T13:40:11.075Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "66363aca1d03926dceede722"
+    },
+    "surname": "Johnson",
+    "name": "Bob",
+    "username": "bobjohnson",
+    "email": "bob.johnson@example.com",
+    "hashedMDP": "$2b$10$EQarpDuVPQoTz7chHzKV6e/V2BtiMqj4JR6A0L1oz5YHdmfrFJ7v.",
+    "cover": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
+    "photo": "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    "bio": "",
+    "valid": true,
+    "admin": false,
+    "subscriptionDate": {
+      "$date": "2024-05-04T13:40:26.703Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "66363ae11d03926dceede725"
+    },
+    "surname": "Davis",
+    "name": "Emma",
+    "username": "emmadavis",
+    "email": "emma.davis@example.com",
+    "hashedMDP": "$2b$10$6lVvV0lhWiMEzkWlxt26WurhlTKm4aJ3gBvxnR/qJIA0/Cjol/sbS",
+    "cover": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
+    "photo": "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    "bio": "",
+    "valid": true,
+    "admin": false,
+    "subscriptionDate": {
+      "$date": "2024-05-04T13:40:49.815Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "66363af31d03926dceede728"
+    },
+    "surname": "Brown",
+    "name": "James",
+    "username": "jamesbrown",
+    "email": "james.brown@example.com",
+    "hashedMDP": "$2b$10$NA.4wxQ31UvjFrLS2TginOs7MzvgnmugL3IqdxxKEdWwutrDt2pHe",
+    "cover": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
+    "photo": "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    "bio": "",
+    "valid": true,
+    "admin": false,
+    "subscriptionDate": {
+      "$date": "2024-05-04T13:41:07.365Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "66363afe1d03926dceede72b"
+    },
+    "surname": "Wilson",
+    "name": "Sophia",
+    "username": "sophiawilson",
+    "email": "sophia.wilson@example.com",
+    "hashedMDP": "$2b$10$dw0tKn2jAjlP919gbd4HU.RIhbpATxFZ6nsngqzE1jAgbY2JBL7kO",
+    "cover": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
+    "photo": "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    "bio": "",
+    "valid": true,
+    "admin": false,
+    "subscriptionDate": {
+      "$date": "2024-05-04T13:41:18.085Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "66363b041d03926dceede72e"
+    },
+    "surname": "Martinez",
+    "name": "Oliver",
+    "username": "olivermartinez",
+    "email": "oliver.martinez@example.com",
+    "hashedMDP": "$2b$10$zGeiox/ZNouQEmSSEeXTPu.ZqntIqVNp.Y5mWvQ/LKUWEVK4uOreC",
+    "cover": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
+    "photo": "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    "bio": "",
+    "valid": true,
+    "admin": false,
+    "subscriptionDate": {
+      "$date": "2024-05-04T13:41:24.576Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "66363b161d03926dceede731"
+    },
+    "surname": "Lee",
+    "name": "Isabella",
+    "username": "isabellalee",
+    "email": "isabella.lee@example.com",
+    "hashedMDP": "$2b$10$kRqsquaCNl3RghWejKzhsujDCa5I5ZJquKqCPK8FkPenuJ5LT2S3W",
+    "cover": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
+    "photo": "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    "bio": "",
+    "valid": true,
+    "admin": false,
+    "subscriptionDate": {
+      "$date": "2024-05-04T13:41:42.588Z"
+    },
+    "__v": 0
+  }
+]
