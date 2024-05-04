@@ -73,7 +73,6 @@ router.patch('/:id', getPost, async (req, res) => {
 router.get('/publicPosts', async (req, res) => {
   try {
     const posts = await Post.find({ privacy: false })
-    console.log(posts)
     res.json(posts)
   } catch (err) {
     res.status(500).json({ message: err.message })

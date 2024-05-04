@@ -13,7 +13,6 @@ function PrivateTextBox({username}){
     // Gestion de la soumission
     const handleSubmit = async (e) => {
         e.preventDefault(); // pour empecher le reload
-        console.log(text);
     
         try {
             // On prend d'abord l'ID de l'utilisateur 
