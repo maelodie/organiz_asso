@@ -28,22 +28,27 @@ function Profil() {
             setCover(response.data.cover);
             setPhoto(response.data.photo);
             setBio(response.data.bio);
-            axios.get(`/posts/post/${response.data._id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            .then(response => {
-                setPosts(response.data);
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des posts', error);
-            });
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des informations utilisateur', error);
         });
-    }, [username, posts]);
+    }, [username]);
+    
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        axios.get(`/posts/post/${user._id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            setPosts(response.data);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des posts', error);
+        });
+    }, [user._id, posts]);
+    
 
     const handleEdit = () => {
         setIsEditing(true);
