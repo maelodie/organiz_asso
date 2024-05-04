@@ -67,7 +67,7 @@ function Post({ post, del }) {
         <div className="post">
             <div id="upper">
                 <img id="pfp" src={user.photo} alt="pfp" />
-                <a href="" onClick={GoToProfil}><p>{user.username}</p></a>
+                {user.admin ? <a href="" onClick={GoToProfil}><p>{user.username} ⭐</p></a> : <a href="" onClick={GoToProfil}><p>{user.username}</p></a>}
                 <p>{post.sendingDate}</p>
                 {del && <button onClick={Delete}>X</button>}
             </div>
