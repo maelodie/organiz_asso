@@ -91,7 +91,7 @@ function Profil() {
                 <button onClick={handleEdit}>Modifier</button>
             )}
             {posts.slice().reverse().map(postx => (
-                <Post key={postx._id} post={postx} />
+                <Post post={postx} del={true} />
             ))}
         </div>
     );
