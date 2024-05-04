@@ -46,17 +46,24 @@ router.post('/:username', async (req, res) => {
 
 // modification d'un post existant
 router.patch('/:id', getPost, async (req, res) => {
-  if (req.body.message != null) {
-    res.post.message = req.body.message
-  }
-
   if (req.body.author != null) {
-    return res.status(400).json({ message: "Changement de l'auteur interdit" });
+    req.post.author = req.body.author
   }
-
+  if (req.body.message != null) {
+    req.post.message = req.body.message
+  }
+  if (req.body.likes != null) {
+    req.post.likes = req.body.likes
+  }
+  if (req.body.sendingDate != null) {
+    req.post.sendingDate = req.body.sendingDate
+  }
+  if (req.body.aswers != null) {
+    req.post.aswers = req.body.aswers
+  }
   try {
-    const updatedPost = await res.post.save()
-    res.json(updatedPost)
+    const updatedPost = await req.post.save();
+    res.json(updatedPost);
   } catch (err) {
     res.status(400).send({ message: err.message })
   }
@@ -98,6 +105,15 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.delete('/delete/:id', getPost, async (req, res) => {
+  try {
+    await req.post.deleteOne();
+    res.json({ message: 'Post supprimé avec succès' });
+  } catch(err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // affiche la liste de tous les posts de la base d'un utilisateur
 router.get('/post/:authorId', async (req, res) => {
   try {
@@ -118,7 +134,7 @@ async function getPost(req, res, next) {
   } catch (err) {
     return res.status(500).json({ message: err.message })
   }
-  res.post = post
+  req.post = post
   next()
 }
 

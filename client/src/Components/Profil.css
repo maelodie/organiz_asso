@@ -1,9 +1,11 @@
-#couverture{
+#couverture {
     width: 100%;
-    height: auto;
+    max-height: 300px; /* Vous pouvez ajuster cette valeur selon vos besoins */
+    object-fit: cover; /* Pour que l'image couvre la zone en conservant ses proportions */
     border-radius: 0%; /* Pour une forme circulaire */
     margin: 10px;
 }
+
 
 p{
     margin-left: 20px;

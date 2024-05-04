@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import axios from 'axios';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import Start from './Components/Start'
@@ -10,6 +9,8 @@ import PrivateForum from './Components/PrivateForum';
 import ValidateMember from './Components/ValidateMember';
 import WaitingRoom from './Components/WaitingRoom';
 import HomeAdmin from './Components/HomeAdmin';
+import ValidateAdmin from './Components/ValidateAdmin';
+import ProfilPrivate from './Components/ProfilPrivate';
 import './App.css'
 
 function App() {
@@ -27,8 +28,10 @@ function App() {
 
                 <Route path='/waitingRoom' element={<WaitingRoom />} />
                 <Route path='/profile/:username' element={<Profil />} />
+                <Route path='/profilePrivate/:username' element={<ProfilPrivate />} />
                 <Route path='/privateForum' element={<PrivateForum />} />
                 <Route path='/validateMembers' element={<ValidateMember />} />
+                <Route path='/adminStatus' element={<ValidateAdmin />} />
             </Routes>
         </BrowserRouter>
     );

@@ -12,6 +12,8 @@ function HomeAdmin() {
     const navigate = useNavigate();
     const location = useLocation();
     const username = location.state.username // fetch username depuis la page de login
+    const token = localStorage.getItem("token");
+  
     // Fonction pour naviguer vers la page Profil
     const goToProfil = () => {
         navigate(`/profile/${username}`, { state : { username : username} });
@@ -21,9 +23,10 @@ function HomeAdmin() {
     const goToValidateMember = () => {
         navigate('/validateMembers');
     }
-    
+
     const goToPrivateForum = () => navigate('/privateForum', { state : { username : username} });
-    const token = localStorage.getItem("token");
+    const goToAdminStatus = () => navigate('/adminStatus', { state : { username : username} });
+
 
     // Fonction pour récupérer la liste des posts publics 
     return (
@@ -34,6 +37,7 @@ function HomeAdmin() {
                 <button onClick={goToProfil}>Profil</button>
                 <button onClick={goToPrivateForum}>Forum Privé</button>
                 <button onClick={goToValidateMember}>Validation Membre</button>
+                <button onClick={goToAdminStatus}>Changement admin</button>
             </div>
             <div id="Feed">
                 <h1>Feed</h1>

@@ -1,6 +1,5 @@
 import React from 'react';
 import PendingMember from './PendingMember';
-import PendingMemberList from './PendingMemberList';
 import "./ValidateMember.css"
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:4000'
@@ -10,7 +9,7 @@ function ValidateMember() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get(`/users/isNotValid`, {
+        axios.get(`/users/valid/no`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`
             }
