@@ -46,8 +46,8 @@ function ProfilPrivate() {
             <img src={user.photo} alt="photo"></img>
             <p id="user">{username}</p>
             <p>{user.bio}</p>
-            {posts.map(postx => (
-                <Post post={postx} del={false} />
+            {posts.slice().reverse().map(postx => (
+                <Post post={postx} del={true} />
             ))}
         </div>
     );

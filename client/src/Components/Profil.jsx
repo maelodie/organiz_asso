@@ -90,7 +90,7 @@ function Profil() {
             ) : (
                 <button onClick={handleEdit}>Modifier</button>
             )}
-            {posts.map(postx => (
+            {posts.slice().reverse().map(postx => (
                 <Post post={postx} del={true} />
             ))}
         </div>
