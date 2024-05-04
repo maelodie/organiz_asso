@@ -24,9 +24,9 @@ function PostList() {
 
     return(
         <div>
-            {posts.map(post => (
+            {posts.slice().reverse().map(post => (
                 <Post post={post} />
-            ))}
+        ))}
         </div>
     );
 }
