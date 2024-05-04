@@ -43,7 +43,7 @@ function Profil() {
         .catch(error => {
             console.error('Erreur lors de la récupération des informations utilisateur', error);
         });
-    }, [username]);
+    }, [username, posts]);
 
     const handleEdit = () => {
         setIsEditing(true);

@@ -20,7 +20,7 @@ function PostList() {
         .catch(error => {
             console.error('Erreur', error);
         })
-    }, []);
+    }, [posts]);
 
     return(
         <div>

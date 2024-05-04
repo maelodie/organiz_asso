@@ -9,7 +9,6 @@ import { useLocation } from 'react-router-dom';
 
 function ValidateAdmin() {
     const [users, setUsers] = useState([]);
-    const [thisUser, setThisUser] = useState('');
     const location = useLocation();
     const username = location.state.username;
 
@@ -19,9 +18,6 @@ function ValidateAdmin() {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
-        })
-        .then(response => {
-            setThisUser(response.data)
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des informations utilisateur', error);
@@ -41,7 +37,7 @@ function ValidateAdmin() {
         .catch(error => {
             console.error('Erreur', error);
         });
-    }, [username]); // Include username as a dependency if it can change
+    }, [username, users]); // Include username as a dependency if it can change
 
     return(
         <div>

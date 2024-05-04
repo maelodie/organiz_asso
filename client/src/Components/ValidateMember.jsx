@@ -21,7 +21,7 @@ function ValidateMember() {
         .catch(error => {
             console.error('Erreur', error);
         })
-    }, []);
+    }, [users]);
 
     return(
         <div>
