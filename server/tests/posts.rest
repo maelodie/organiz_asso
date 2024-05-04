@@ -55,3 +55,10 @@ Content-Type: application/json
 GET http://localhost:4000/posts/662d2d044017ee680474caa5
 
 ###
+
+POST http://localhost:4000/posts/post/search/ 
+Content-Type: application/json
+
+{
+  "keyword" : "coucou"
+}

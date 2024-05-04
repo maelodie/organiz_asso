@@ -56,4 +56,5 @@ const postsSchema = new mongoose.Schema({
   }
 })
 
+postsSchema.index({ message: 'text' }); // indicetextuel pour la recherche à partir d'un mot-clé
 module.exports = mongoose.model('Post', postsSchema) // pour intéragir avec le schema dans d'autres bases de données 

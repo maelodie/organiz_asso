@@ -2,8 +2,40 @@ const express = require('express')
 const router = express.Router()
 const Post = require('../models/posts')
 const User = require('../models/users')
-const { authenticateJWT }  = require('../middlewares/authentication')
+const { authenticateJWT } = require('../middlewares/authentication')
 
+// Recherche avec filtres dynamiques
+router.post('/post/search', async (req, res) => {
+
+  const { keyword, author, startDate, endDate } = req.body;
+  const filters = {};
+  
+  if (keyword && keyword!=='') {
+    filters.$text = { $search: keyword };
+  }
+  if (author && author!=='') {
+    filters.author = author;
+  }
+
+  if (startDate && endDate && startDate!=='' && endDate!=='') {
+    filters.sendingDate = { $gte: new Date(startDate), $lte: new Date(endDate) };
+  }
+  
+  filters.privacy = "false";
+
+  console.log(filters)
+  try {
+    const posts = await Post.find(filters);
+    console.log(posts)
+    if (posts.length === 0) {
+      return res.status(404).json({ message: "Aucun message trouvé" });
+    }
+    
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // création d'un nouveau post
 router.post('/', async (req, res) => {
@@ -20,6 +52,8 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 })
+
+
 
 // création d'un nouveau post avec un utilisateur précis
 router.post('/:username', async (req, res) => {
@@ -108,7 +142,7 @@ router.delete('/delete/:id', getPost, async (req, res) => {
   try {
     await req.post.deleteOne();
     res.json({ message: 'Post supprimé avec succès' });
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
@@ -123,6 +157,7 @@ router.get('/post/:authorId', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 // fonction middleware pour trouver un message précis
 async function getPost(req, res, next) {
