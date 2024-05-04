@@ -14,6 +14,9 @@ function SearchBar() {
     let author;
     
     const handleSearch = async () => {
+        if(!username && !keyword && !startDate && !endDate){
+            return
+        }
         try {
             if (username) {
                 await axios.get(`/users/${username}`, { headers: { Authorization: `Bearer ${token}` } })
