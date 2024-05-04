@@ -1,10 +1,47 @@
-POST http://localhost:4000/posts/taylorswift13
+# Création d'un nouvel utilisateur qui va poster des messages
+POST http://localhost:4000/auth/signup
+Content-Type: application/json
+
+{
+  "name": "user1",
+  "surname": "user1",
+  "username": "user1",
+  "email": "user1.user1@example.com",
+  "password": "123",
+  "admin": true
+}
+
+###
+# Connexion de l'utilisateur
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "password": "12345"
+}
+
+###
+# Création d'un nouveau message
+POST http://localhost:4000/posts/johndoe
 Content-Type: application/json
 
 {
   "author": "662d2cd94017ee680474caa0",
-  "message": "The tortured poets department is out now !"
+  "message": "The tortured poets department is out now !",
+  "privacy": false
 }
+###
+# Récupération de tous les posts 
+GET http://localhost:4000/posts/
+
+###
+# Récupération des posts privés
+GET http://localhost:4000/posts/privatePosts
+
+###
+# Récupération des posts publics
+GET http://localhost:4000/posts/publicPosts
 
 ###
 PATCH http://localhost:4000/posts/662d2d044017ee680474caa5

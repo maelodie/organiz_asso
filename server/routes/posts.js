@@ -1,20 +1,23 @@
 const express = require('express')
 const router = express.Router()
 const Post = require('../models/posts')
-const User = require('../models/users') 
+const User = require('../models/users')
+const { authenticateJWT }  = require('../middlewares/authentication')
+
 
 // création d'un nouveau post
 router.post('/', async (req, res) => {
   const post = new Post({
     author: req.body.author, // ID de l'utilisateur qui a créé le message
-    message: req.body.message
+    message: req.body.message,
+    privacy: req.body.privacy
   });
 
   try {
     const newPost = await post.save();
     res.status(201).json(newPost);
-  } catch(err) {
-    res.status(400).json({ message : err.message });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 })
 
@@ -30,13 +33,14 @@ router.post('/:username', async (req, res) => {
     // Créer un nouveau message avec l'utilisateur trouvé
     const post = new Post({
       author: user._id,
-      message: req.body.message
+      message: req.body.message,
+      privacy: req.body.privacy
     });
 
     const newPost = await post.save();
     res.status(201).json(newPost);
-  } catch(err) {
-    res.status(400).json({ message : err.message });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 
@@ -61,7 +65,28 @@ router.patch('/:id', getPost, async (req, res) => {
     const updatedPost = await req.post.save();
     res.json(updatedPost);
   } catch (err) {
-    res.status(400).send({ message: err.message });
+    res.status(400).send({ message: err.message })
+  }
+})
+
+// affiche la liste de tous les posts publics 
+router.get('/publicPosts', async (req, res) => {
+  try {
+    const posts = await Post.find({ privacy: false })
+    console.log(posts)
+    res.json(posts)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
+// affiche la liste de tous les posts privés 
+router.get('/privatePosts', async (req, res) => {
+  try {
+    const posts = await Post.find({ privacy: true })
+    res.json(posts)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -76,11 +101,10 @@ router.get('/', async (req, res) => {
     const posts = await Post.find()
     res.json(posts)
   } catch (err) {
-    res.status(500).json({ message : err.message})
+    res.status(500).json({ message: err.message })
   }
 })
 
-// Suppression d'un post existant
 router.delete('/delete/:id', getPost, async (req, res) => {
   try {
     await req.post.deleteOne();
@@ -90,6 +114,7 @@ router.delete('/delete/:id', getPost, async (req, res) => {
   }
 });
 
+// affiche la liste de tous les posts de la base d'un utilisateur
 router.get('/post/:authorId', async (req, res) => {
   try {
     const authorId = req.params.authorId;
@@ -105,9 +130,9 @@ async function getPost(req, res, next) {
   let post
   try {
     post = await Post.findById(req.params.id)
-    if(!post) return res.status(404).json({ message : 'Message non trouvé'})
+    if (!post) return res.status(404).json({ message: 'Message non trouvé' })
   } catch (err) {
-  return res.status(500).json({ message: err.message})
+    return res.status(500).json({ message: err.message })
   }
   req.post = post
   next()

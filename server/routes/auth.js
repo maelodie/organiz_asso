@@ -4,12 +4,9 @@ const session = require('express-session')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const cors = require('cors');
 const User = require('../models/users')
 const { authenticateJWT, encryptMDP } = require('../middlewares/authentication');
 
-// cors
-router.use(cors());
 
 // signup
 router.post('/signup', async (req, res) => {

@@ -11,8 +11,9 @@ axios.defaults.baseURL = 'http://localhost:4000'
 function HomeAdmin() {
     const navigate = useNavigate();
     const location = useLocation();
-    // fetch username depuis la page de login
-    const username = location.state.username
+    const username = location.state.username // fetch username depuis la page de login
+    const token = localStorage.getItem("token");
+  
     // Fonction pour naviguer vers la page Profil
     const goToProfil = () => {
         navigate(`/profile/${username}`, { state : { username : username} });
@@ -22,10 +23,12 @@ function HomeAdmin() {
     const goToValidateMember = () => {
         navigate('/validateMembers');
     }
-    
-    const goToPrivateForum = () => navigate('/privateForum');
+
+    const goToPrivateForum = () => navigate('/privateForum', { state : { username : username} });
     const goToAdminStatus = () => navigate('/adminStatus', { state : { username : username} });
 
+
+    // Fonction pour récupérer la liste des posts publics 
     return (
 
         <div className="container">
@@ -39,7 +42,7 @@ function HomeAdmin() {
             <div id="Feed">
                 <h1>Feed</h1>
                 <TextBox username={username } />
-                <PostList />
+                <PostList/>
             </div>
             <div className="Panel">
                 <h2>Recherche</h2>

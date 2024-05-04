@@ -4,12 +4,12 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
-function PostList() {
+function PrivatePostList() {
     const [posts, setPosts] = useState([]);
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        axios.get(`/posts/publicPosts`, {
+        axios.get(`/posts/privatePosts`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -31,4 +31,4 @@ function PostList() {
     );
 }
 
-export default PostList;
+export default PrivatePostList;

@@ -4,8 +4,7 @@ const router = express.Router()
 const User = require('../models/users') // pour reprendre le schema
 const { authenticateJWT , encryptMDP }  = require('../middlewares/authentication')
 
-// pour protéger les requêtes suivantes (il faut que l'utilisateur soit connecté)
-router.use(authenticateJWT);
+
 
 // createUser: créer un nouvel utilisateur
 router.post('/', async (req, res) => {
