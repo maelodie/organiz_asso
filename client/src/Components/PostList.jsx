@@ -24,9 +24,10 @@ function PostList() {
 
     return(
         <div>
-            {posts.slice().reverse().map(post => (
-                <Post post={post} />
-        ))}
+            {posts.slice().reverse().map(postx => (
+                <Post key={postx._id} post={postx} />
+            ))}
+
         </div>
     );
 }

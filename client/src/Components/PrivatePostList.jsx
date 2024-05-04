@@ -11,22 +11,23 @@ function PrivatePostList() {
     useEffect(() => {
         axios.get(`/posts/privatePosts`, {
             headers: {
-              Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         })
-        .then(response => {
-            setPosts(response.data)
-        })
-        .catch(error => {
-            console.error('Erreur', error);
-        })
+            .then(response => {
+                setPosts(response.data)
+            })
+            .catch(error => {
+                console.error('Erreur', error);
+            })
     }, [posts]);
 
-    return(
+    return (
         <div>
-            {posts.slice().reverse().map(post => (
-                <Post post={post} />
-        ))}
+            {posts.slice().reverse().map(postx => (
+                <Post key={postx._id} post={postx} />
+            ))}
+
         </div>
     );
 }
