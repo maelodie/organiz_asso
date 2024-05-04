@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PendingMember from './PendingMember';
-import PendingMemberList from './PendingMemberList';
 import "./ValidateMember.css"
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:4000'
