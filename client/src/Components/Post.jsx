@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Post.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import Heart from 'react-heart'
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
@@ -9,20 +11,21 @@ function Post({ post, del }) {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
+    const [active, setActive] = useState(false); //pour le coeur
 
     useEffect(() => {
         if (post.author) {
             axios.get(`users/${post.author}`, {
                 headers: {
-                  Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 }
             })
-            .then(response => {
-                setUser(response.data);
-            })
-            .catch(error => {
-                console.error('Erreur', error);
-            });
+                .then(response => {
+                    setUser(response.data);
+                })
+                .catch(error => {
+                    console.error('Erreur', error);
+                });
         }
     }, [post.author]);
 
@@ -31,14 +34,14 @@ function Post({ post, del }) {
     }
 
     const Delete = () => {
-        axios.delete(`/posts/delete/${post._id}`, { headers: { Authorization: `Bearer ${token}` }})
-        .catch(error => {
-            console.error('Erreur', error);
-        })
+        axios.delete(`/posts/delete/${post._id}`, { headers: { Authorization: `Bearer ${token}` } })
+            .catch(error => {
+                console.error('Erreur', error);
+            })
     };
 
     const GoToProfil = () => {
-        navigate(`/profilePrivate/${user.username}`, { state : { username : user.username} });
+        navigate(`/profilePrivate/${user.username}`, { state: { username: user.username } });
     };
 
     const Like = () => {
@@ -52,31 +55,44 @@ function Post({ post, del }) {
         const credentials = {
             likes: updatedLikes
         };
-        
+
         axios.patch(`/posts/${post._id}`, credentials, {
             headers: {
-              Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         })
-        .catch(error => {
-            console.error('Erreur', error);
-        })
+            .catch(error => {
+                console.error('Erreur', error);
+            })
+        setActive(!active)
+    };
+
+    // temps écoulé depuis la date de publication
+    const formatElapsedTime = (publishDate) => {
+        return moment(publishDate).fromNow(); // Utilisez moment pour obtenir le temps écoulé
     };
 
     return (
         <div className="post">
             <div id="upper">
                 <img id="pfp" src={user.photo} alt="pfp" />
-                {user.admin ? <a href="" onClick={GoToProfil}><p>{user.username} ⭐</p></a> : <a href="" onClick={GoToProfil}><p>{user.username}</p></a>}
-                <p>{post.sendingDate}</p>
+                <div id="info">
+                    <p id="prenom"> {user.surname} </p>
+                    {user.admin ? <a href="" onClick={GoToProfil}><p>{user.username} ⭐</p></a> : <a href="" onClick={GoToProfil}><p>{user.username}</p></a>}
+                </div>
+                <p id="date">{formatElapsedTime(post.sendingDate)}</p>
                 {del && <button onClick={Delete}>X</button>}
             </div>
             <div id="text">
                 <p>{post.message}</p>
+            </div >
+            <div id="likes">
+                <div style={{ width: "1.7rem" }}>
+                    <Heart id="heart" isActive={active} onClick={Like} />
+                    <p>{post.likes}</p>
+                </div>
             </div>
-            <div>
-                <p>{post.likes} likes <button onClick={Like}>❤️</button></p>
-            </div>
+
         </div>
     );
 }

@@ -2,6 +2,11 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'New York', sans-serif;
+}
+
+.h2 {
+    margin-bottom: -100px;
 }
 
 .container {
@@ -12,10 +17,50 @@ html, body {
 }
 
 .Panel {
-    background-color: #beb9f7;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    width: 300px;       /*A corriger*/
+    height: 100%;
+    width: 100%;       
+}
+
+.picture {
+    margin-top: 50px;
+}
+
+.nameInfo {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0px; 
+    margin-top: -20px;
+}
+
+.userInfo p:last-child {
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
+.Feed {
+    margin-top: 50px;
+}
+.button {
+    font-size: 20px;
+    border-radius: 15px;
+    width:300px;
+}
+
+.Recherche {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;  
 }

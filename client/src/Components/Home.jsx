@@ -21,7 +21,7 @@ function Home() {
         <div className="container">
             <div className="Panel">
                 <h2>Navigation</h2>
-                <button onClick={goToProfil}>Profil</button>
+                <button id="button" onClick={goToProfil}>Profil</button>
             </div>
             <div id="Feed">
                 <h1>Feed</h1>

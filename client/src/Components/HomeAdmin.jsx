@@ -11,12 +11,31 @@ axios.defaults.baseURL = 'http://localhost:4000'
 function HomeAdmin() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [user, setUser] = useState()
     const username = location.state.username // fetch username depuis la page de login
-    const token = localStorage.getItem("token");
-  
+
+    // Données sur l'utilisateur:
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await axios.get(`/users/${username}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setUser(response.data);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des informations utilisateur', error);
+            }
+        };
+        fetchUserData();
+    }, []);
+
+
     // Fonction pour naviguer vers la page Profil
     const goToProfil = () => {
-        navigate(`/profile/${username}`, { state : { username : username} });
+        navigate(`/profile/${username}`, { state: { username: username } });
     };
 
     // Fonctions pour naviguer vers différentes pages
@@ -24,28 +43,34 @@ function HomeAdmin() {
         navigate('/validateMembers');
     }
 
-    const goToPrivateForum = () => navigate('/privateForum', { state : { username : username} });
-    const goToAdminStatus = () => navigate('/adminStatus', { state : { username : username} });
+    const goToPrivateForum = () => navigate('/privateForum', { state: { username: username } });
+    const goToAdminStatus = () => navigate('/adminStatus', { state: { username: username } });
 
 
     // Fonction pour récupérer la liste des posts publics 
     return (
-
         <div className="container">
             <div className="Panel">
-                <h2>Navigation</h2>
-                <button onClick={goToProfil}>Profil</button>
-                <button onClick={goToPrivateForum}>Forum Privé</button>
-                <button onClick={goToValidateMember}>Validation Membre</button>
-                <button onClick={goToAdminStatus}>Changement admin</button>
+                <div className="userBox">
+                    <div className="picture">
+                        {user && user.photo && <img src={user.photo} alt="photo de profil"></img>}
+                    </div>
+                    <div className='userInfo'>
+                        {user && <p className='nameInfo'>{user.surname} {user.name}</p>}
+                        {user && <p>@{user.username}</p>}
+                    </div>
+                </div>
+                <button className="button" onClick={goToProfil}>Profil</button>
+                <button className="button" onClick={goToPrivateForum}>Forum Privé</button>
+                <button className="button" onClick={goToValidateMember}>Validation membres</button>
+                <button className="button" onClick={goToAdminStatus}>Gestion admin</button>
             </div>
-            <div id="Feed">
-                <h1>Feed</h1>
-                <TextBox username={username } />
-                <PostList/>
+            <div className="Feed">
+                <TextBox username={username} />
+                <PostList />
             </div>
-            <div className="Panel">
-                <h2>Recherche</h2>
+            <div className="Recherche">
+                <h2> Explorer </h2>
                 <SearchBar />
             </div>
         </div>

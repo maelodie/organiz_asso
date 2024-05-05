@@ -6,22 +6,56 @@
 #upper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    margin-top: 1px;
+}
+
+#info {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    margin: -4px; 
+}
+
+#prenom {
+    font-size: 16px;
+    margin-bottom: -10px;
+    font-weight: bold; 
+}
+#date {
+    margin-left: auto;
+    margin-right: 10px;
+
 }
 
 #text {
-    width: 500px;
+    width: 850px;
     height: 100px;
     padding: 20px;
     font-size: 16px;
+    border-radius: 20px;
     outline: none;
-    background-color: #b9aeff; 
+    background-color: #f6f6f6;
 }
 
-.post {
-    border: 2px solid #362c2c;
-    border-radius: 10px;
-    margin: 10px;
-    background-color: #b9aeff; 
-    padding: 20px;
+#likes {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 5px
 }
+
+#likes p:last-child {
+    margin-top: -25px;
+    margin-left: 35px;
+}
+.post {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    width: 900px; 
+} 

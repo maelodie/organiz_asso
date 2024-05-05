@@ -1,7 +1,7 @@
 /*Background*/
 body {
-    background-color: #a6a1e1; 
-    font-family: "Roboto", sans-serif;
+    background-color: #f6f6f6; 
+    font-family: "New York", sans-serif;
 }
 
 /* Style de base pour les boutons */
@@ -14,8 +14,8 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #623ca8;
-    color: white;
+    background-color: #c5b1d4;
+    color: #ffffff;
     transition: background-color 0.3s;
     margin: 5px;
   }

@@ -1,0 +1,37 @@
+/* SearchBar.css */
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  align-items: center;
+  margin-bottom: 20px; /* Espacement entre la barre de recherche et les éléments suivants */
+}
+
+.search-bar p:first-child {
+  margin-top: 50px;
+}
+
+.search-input {
+  border: 1px solid #ccc; /* Bordure grise */
+  border-radius: 15px; /* Coins arrondis */
+  padding: 8px; /* Espacement interne */
+  margin-right: 5px; /* Espacement entre les champs de recherche */
+}
+
+.search-button {
+  background-color: #c5b1d4; /* Couleur de fond bleue */
+  width: 200px;
+  color: #fff; /* Couleur du texte blanc */
+  border: none; /* Pas de bordure */
+  border-radius: 15px; /* Coins arrondis */
+  padding: 8px 15px; /* Espacement interne */
+  cursor: pointer; /* Curseur pointeur */
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.search-icon {
+  margin-right: 5px; /* Espacement entre l'icône et le texte */
+}
