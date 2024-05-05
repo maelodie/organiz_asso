@@ -1,0 +1,29 @@
+.waiting-room-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.waiting-room-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.waiting-room-message {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.waiting-room-signature {
+    font-style: italic;
+    color: #888;
+}
+
+.waiting-room-signature strong {
+    font-weight: bold;
+    color: #555;
+}
