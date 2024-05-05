@@ -66,7 +66,7 @@ function HomeAdmin() {
                 <button className="button" onClick={goToAdminStatus}>Gestion admin</button>
             </div>
             <div id="Feed">
-                <h1>Feed</h1>
+                <h1>Bienvenue, {user && user.surname}! </h1>
                 <TextBox username={username} />
                 <PostList username={username} />
             </div>

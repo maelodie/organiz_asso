@@ -47,9 +47,10 @@ function TextBox({username}){
     
 
     return(
-        <form id="input" onSubmit={handleSubmit}>
+        <form id="form" onSubmit={handleSubmit}>
             <div>
                 <textarea
+                id="input"
                 placeholder="Type here..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}

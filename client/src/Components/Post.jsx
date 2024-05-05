@@ -14,6 +14,7 @@ function Post({ post, del, username }) {
     const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
     const [active, setActive] = useState(false); //pour le coeur
+    const [showMore, setShowMore] = useState(false);
 
     useEffect(() => {
         if (post.author) {
@@ -74,6 +75,12 @@ function Post({ post, del, username }) {
         return moment(publishDate).fromNow(); // Utilisez moment pour obtenir le temps écoulé
     };
 
+    // Fonction pour afficher les commentaires lorsque le bouton est cliqué
+    const handleShowMore = () => {
+        setShowMore(!showMore);
+    };
+
+
     return (
         <div className="post">
             <div id="upper">
@@ -88,17 +95,19 @@ function Post({ post, del, username }) {
             <div id="text">
                 <p>{post.message}</p>
             </div >
-            <div id="likes">
-                <div style={{ width: "1.7rem" }}>
-                    <Heart id="heart" isActive={active} onClick={Like} />
-                    <p>{post.likes}</p>
+            <div id="stats">
+                <div id="likes">
+                    <div style={{ width: "1.7rem" }}>
+                        <Heart id="heart" isActive={active} onClick={Like} />
+                        <p>{post.likes}</p>
+                    </div>
+                    <button id="commentairesButton" onClick={handleShowMore}>Afficher les commentaires</button>
                 </div>
             </div>
-            <div>
                 <TextCommentBox username={username} post={post} />
-                <CommentList post={post}/>
-            </div>
-
+                {!showMore && (
+                    <CommentList post={post} />
+                )}
         </div>
     );
 }

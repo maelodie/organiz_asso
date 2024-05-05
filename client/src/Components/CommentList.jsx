@@ -24,7 +24,6 @@ function CommentList({post}) {
 
     return(
         <div>
-            <h3>Comments</h3>
             {post.answers.map((answer, index) => (
                 <Comment key={index} post={answer} del={false} />
             ))}

@@ -63,10 +63,11 @@ function TextCommentBox({username, post}){
     
 
     return(
-        <form id="input" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <textarea
-                placeholder="Type here..."
+                className="commenttext"
+                placeholder="Type here to comment"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 required

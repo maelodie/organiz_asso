@@ -23,9 +23,8 @@
     font-weight: bold; 
 }
 #date {
-    margin-left: auto;
+    margin-left: 580px;
     margin-right: 10px;
-
 }
 
 #text {
@@ -36,12 +35,15 @@
     border-radius: 20px;
     outline: none;
     background-color: #f6f6f6;
+    overflow: auto; 
+    word-wrap: break-word; 
 }
 
 #likes {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     margin-top: 5px
 }
 
@@ -49,13 +51,46 @@
     margin-top: -25px;
     margin-left: 35px;
 }
+
+#commentairesButton {
+    width: 250px;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #000000;
+    margin: 5px;
+    font-weight: bold;
+}
+
+#commentairesButton:hover {
+    background-color: #c5b1d4 ;
+}
+
+#stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Les éléments seront espacés uniformément */
+    align-items: center;
+}
+
+#stats button:last-child {
+    margin-left: 620px;
+}
+
 .post {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-top: 20px;
     margin: 10px;
     border-radius: 20px;
     background-color: #ffffff;
     padding: 20px;
-    width: 900px; 
+    width: 920px; 
+    overflow: hidden;
 } 

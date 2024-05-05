@@ -1,11 +1,9 @@
-#input textarea{
-    width: 950px;
-    height: 100px;
+#input{
+    width: 970px;
     border-radius: 20px;
     font-size: 16px;
     outline: none;
     background-color: #ffffff; 
-
-    resize: vertical;
-    min-height: 100px; /* Définissez ici la hauteur minimale désirée */
+    resize: none;
+    min-height: 20px; 
 }
