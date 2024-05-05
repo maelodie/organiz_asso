@@ -14,7 +14,7 @@ function Post({ post, del, username }) {
     const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
     const [active, setActive] = useState(false); //pour le coeur
-    const [showMore, setShowMore] = useState(false);
+    const [showMore, setShowMore] = useState(true);
 
     useEffect(() => {
         if (post.author) {
@@ -101,7 +101,7 @@ function Post({ post, del, username }) {
                         <Heart id="heart" isActive={active} onClick={Like} />
                         <p>{post.likes}</p>
                     </div>
-                    <button id="commentairesButton" onClick={handleShowMore}>Afficher les commentaires</button>
+                    <button id="commentairesButton" onClick={handleShowMore}>{showMore ? "Afficher les commentaires" : "Masquer les commentaires"}</button>
                 </div>
             </div>
                 <TextCommentBox username={username} post={post} />
