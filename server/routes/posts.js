@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Post = require('../models/posts')
+const { Post, Answer } = require('../models/posts'); // Importer à la fois Post et Answer depuis le fichier models/posts.js
 const User = require('../models/users')
 const { authenticateJWT } = require('../middlewares/authentication')
 
@@ -53,6 +53,21 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.post('/comment', async (req, res) => {
+  const comment = new Answer({
+    author: req.body.author, // ID de l'utilisateur qui a créé le message
+    message: req.body.message,
+    privacy: req.body.privacy
+  });
+
+  try {
+    const newComment = await comment.save();
+    res.status(201).json(newComment);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+})
+
 
 
 // création d'un nouveau post avec un utilisateur précis
@@ -92,8 +107,8 @@ router.patch('/:id', getPost, async (req, res) => {
   if (req.body.sendingDate != null) {
     req.post.sendingDate = req.body.sendingDate
   }
-  if (req.body.aswers != null) {
-    req.post.aswers = req.body.aswers
+  if (req.body.answers != null) {
+    req.post.answers = req.body.answers
   }
   try {
     const updatedPost = await req.post.save();

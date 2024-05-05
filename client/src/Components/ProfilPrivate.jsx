@@ -47,7 +47,7 @@ function ProfilPrivate() {
             {user.admin ? <p id="user">{username} ⭐</p> : <p id="user">{username}</p>}
             <p>{user.bio}</p>
             {posts.slice().reverse().map(postx => (
-                <Post post={postx} del={false} />
+                <Post post={postx} del={true} username={username} />
             ))}
         </div>
     );

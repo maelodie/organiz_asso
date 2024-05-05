@@ -4,7 +4,7 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
-function PrivatePostList() {
+function PrivatePostList({username}) {
     const [posts, setPosts] = useState([]);
     const token = localStorage.getItem("token");
 
@@ -25,7 +25,7 @@ function PrivatePostList() {
     return (
         <div>
             {posts.slice().reverse().map(postx => (
-                <Post key={postx._id} post={postx} />
+                <Post post={postx} del={true} username={username} />
             ))}
 
         </div>

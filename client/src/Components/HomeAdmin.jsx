@@ -65,9 +65,10 @@ function HomeAdmin() {
                 <button className="button" onClick={goToValidateMember}>Validation membres</button>
                 <button className="button" onClick={goToAdminStatus}>Gestion admin</button>
             </div>
-            <div className="Feed">
+            <div id="Feed">
+                <h1>Feed</h1>
                 <TextBox username={username} />
-                <PostList />
+                <PostList username={username} />
             </div>
             <div className="Recherche">
                 <h2> Explorer </h2>

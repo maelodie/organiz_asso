@@ -19,7 +19,7 @@ function PrivateForum({list}) {
             </div>
             <div>
                 <PrivateTextBox username={ username }/>
-                <PrivatePostLists />
+                <PrivatePostLists username={ username }/>
             </div>
         </div>
     )
