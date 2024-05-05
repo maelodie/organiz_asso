@@ -166,7 +166,9 @@ router.delete('/delete/:id', getPost, async (req, res) => {
 router.get('/post/:authorId', async (req, res) => {
   try {
     const authorId = req.params.authorId;
-    const posts = await getPostsByAuthorId(authorId);
+    const privacy = req.query.privacy === 'true'; // Récupérer le paramètre privacy de la requête et le convertir en boolean
+
+    const posts = await Post.find({ author: authorId, privacy: privacy });
     res.json(posts);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -36,7 +36,7 @@ function Profil() {
     
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`/posts/post/${user._id}`, {
+        axios.get(`/posts/post/${user._id}`, { params: { privacy: false } },  {
             headers: {
                 Authorization: `Bearer ${token}`
             }
