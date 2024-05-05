@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './TextBox.css';
+import './PrivateTextBox.css';
 import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:4000'
@@ -47,7 +47,7 @@ function PrivateTextBox({username}){
     
 
     return(
-        <form id="input" onSubmit={handleSubmit}>
+        <form id="input2" onSubmit={handleSubmit}>
             <div>
                 <textarea
                 placeholder="Exprimez-vous..."

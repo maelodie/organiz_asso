@@ -18,6 +18,7 @@ function PrivateForum({list}) {
                 <h1 id="title">Forum Privé</h1>
             </div>
             <div>
+                <h1>Communication Restreinte</h1>
                 <PrivateTextBox username={ username }/>
                 <PrivatePostLists username={ username }/>
             </div>

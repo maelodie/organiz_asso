@@ -5,7 +5,8 @@
 }
 
 #title{
-    background-color: #beb9f7;
+    background-color: #c5b1d4;
+    border-radius: 20px;
     height: 100vh;
     display: flex;
     flex-direction: column;
