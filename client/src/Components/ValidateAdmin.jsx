@@ -39,7 +39,7 @@ function ValidateAdmin() {
 
     return(
         <div>
-            <h1>Statut admin</h1>
+            <h1>Gestion des Statuts Administrateurs des Utilisateurs</h1>
             {users.map(userx => (
                 <IsMemberAdmin user={userx} />
             ))}

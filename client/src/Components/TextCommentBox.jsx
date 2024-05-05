@@ -67,13 +67,13 @@ function TextCommentBox({username, post}){
             <div>
                 <textarea
                 className="commenttext"
-                placeholder="Type here to comment"
+                placeholder="Écrivez un commentaire..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 required
                 />
             </div>
-            <button type="submit">Post</button>
+            <button type="submit">Poster</button>
         </form>
 
     )

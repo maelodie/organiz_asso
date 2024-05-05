@@ -62,8 +62,8 @@ function HomeAdmin() {
                 </div>
                 <button className="button" onClick={goToProfil}>Profil</button>
                 <button className="button" onClick={goToPrivateForum}>Forum Privé</button>
-                <button className="button" onClick={goToValidateMember}>Validation membres</button>
-                <button className="button" onClick={goToAdminStatus}>Gestion admin</button>
+                <button className="button" onClick={goToValidateMember}>Validation Utilisateurs</button>
+                <button className="button" onClick={goToAdminStatus}>Gestion des Administrateurs</button>
             </div>
             <div id="Feed">
                 <h1>Bienvenue, {user && user.surname}! </h1>

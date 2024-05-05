@@ -50,13 +50,13 @@ function PrivateTextBox({username}){
         <form id="input" onSubmit={handleSubmit}>
             <div>
                 <textarea
-                placeholder="Type here..."
+                placeholder="Exprimez-vous..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 required
                 />
             </div>
-            <button type="submit">Post</button>
+            <button type="submit">Poster</button>
         </form>
 
     )

@@ -39,8 +39,8 @@ function PendingMember({user}) {
         <div id="validate">
             <img id="pfp" src={user.photo} alt="logo"></img>
             <p>{user.username}</p>
-            <button onClick={Approve}>ok</button>
-            <button onClick={Refuse}>no</button>
+            <button onClick={Approve}> Accepter </button>
+            <button onClick={Refuse}> Refuser </button>
         </div>
     )
 }

@@ -24,7 +24,7 @@ function ValidateMember() {
 
     return(
         <div>
-            <h1>En attente</h1>
+            <h1>Liste des Utilisateurs en Attente de Validation</h1>
             {users.map(userx => (
                 <PendingMember user={userx} />
             ))}

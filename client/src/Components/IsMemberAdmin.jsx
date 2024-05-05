@@ -34,7 +34,7 @@ function isMemberAdmin({user}) {
         <div id="validate">
             <img id="pfp" src={user.photo} alt="logo"></img>
             {user.admin ? <p>{user.username} ⭐</p> : <p>{user.username}</p>}
-            <button onClick={toggleAdminStatus}> {user.admin ? "Enlever le statut admin" : "Changer en admin"} </button>
+            <button onClick={toggleAdminStatus}> {user.admin ? "Rétrograder" : "Promouvoir au Statut Admin"} </button>
         </div>
     )
 }

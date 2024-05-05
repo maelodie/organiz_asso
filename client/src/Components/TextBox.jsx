@@ -51,13 +51,13 @@ function TextBox({username}){
             <div>
                 <textarea
                 id="input"
-                placeholder="Type here..."
+                placeholder="Partagez vos pensées..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 required
                 />
             </div>
-            <button type="submit">Post</button>
+            <button type="submit">Poster</button>
         </form>
 
     )
