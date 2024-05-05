@@ -50,11 +50,14 @@ const postsSchema = new mongoose.Schema({
     required: true,
     default: Date.now
   }, 
-  aswers: {
+  answers: {
     type: [answerSchema],
     default: []
   }
 })
 
-postsSchema.index({ message: 'text' }); // indicetextuel pour la recherche à partir d'un mot-clé
-module.exports = mongoose.model('Post', postsSchema) // pour intéragir avec le schema dans d'autres bases de données 
+postsSchema.index({ message: 'text' });
+const Post = mongoose.model('Post', postsSchema); // Exportation du modèle de post
+const Answer = mongoose.model('Answer', answerSchema); // Exportation du modèle de réponse
+
+module.exports = { Post, Answer }; // Exportation des deux modèles

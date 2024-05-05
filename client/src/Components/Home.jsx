@@ -25,8 +25,8 @@ function Home() {
             </div>
             <div id="Feed">
                 <h1>Feed</h1>
-                <TextBox username={username } />
-                <PostList />
+                <TextBox username={username} />
+                <PostList username={username} />
             </div>
             <div className="Panel">
                 <h2>Recherche</h2>

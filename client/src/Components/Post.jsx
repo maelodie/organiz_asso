@@ -4,10 +4,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import Heart from 'react-heart'
+import TextCommentBox from './TextCommentBox';
+import CommentList from './CommentList'
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
-function Post({ post, del }) {
+function Post({ post, del, username }) {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
@@ -91,6 +93,10 @@ function Post({ post, del }) {
                     <Heart id="heart" isActive={active} onClick={Like} />
                     <p>{post.likes}</p>
                 </div>
+            </div>
+            <div>
+                <TextCommentBox username={username} post={post} />
+                <CommentList post={post}/>
             </div>
 
         </div>
