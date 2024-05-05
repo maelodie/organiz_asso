@@ -15,8 +15,8 @@ function Start() {
   return (
     <div className="premier">
       <img src="https://png.pngtree.com/png-clipart/20211009/original/pngtree-aesthetic-pink-flower-logo-with-outline-png-image_6846146.png" alt="logo"></img>
-      <button onClick={goToLogin}>Login</button>
-      <button onClick={goToSignUp}>SignUp</button>
+      <button onClick={goToLogin}>Connexion</button>
+      <button onClick={goToSignUp}>Inscription</button>
     </div>
   );
 }

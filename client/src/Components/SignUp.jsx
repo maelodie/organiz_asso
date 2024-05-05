@@ -56,7 +56,7 @@ function SignUp() {
 
     return (
         <div className="premier">
-            <h1>SignUp</h1>
+            <h1>Inscription</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <input

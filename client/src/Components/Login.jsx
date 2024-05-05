@@ -54,12 +54,12 @@ function Login() {
 
     return (
         <div className='premier'>
-            <h1>Login</h1>
+            <h1>Connexion</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <input
                         type="text"
-                        placeholder="Username"
+                        placeholder="Nom d'utilisateur"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
@@ -68,7 +68,7 @@ function Login() {
                 <div className="input-wrapper">
                     <input
                         type="password"
-                        placeholder="Password"
+                        placeholder="Mot de passe"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
