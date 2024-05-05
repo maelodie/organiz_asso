@@ -3,9 +3,9 @@
     flex-direction: row;
     justify-content: space-between;
 
-    border: 2px solid #362c2c;
-    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
     margin: 10px;
-    background-color: #b9aeff; 
+    background-color: #ffffff;
     padding: 20px;
 }
