@@ -1,12 +1,24 @@
-require('dotenv').config() // pour récupérer les données de .env
-const express = require('express')
-const session = require('express-session')
-const router = express.Router()
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
-const User = require('../models/users')
+const express = require('express');
+const router = express.Router();
+const { MongoClient, ObjectId } = require('mongodb');
 const { authenticateJWT, encryptMDP } = require('../middlewares/authentication');
 
+// Connexion à la base de données MongoDB
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+async function connectToDatabase() {
+  try {
+    await client.connect();
+    console.log('Connected to the database');
+  } catch (error) {
+    console.error('Error connecting to the database: ', error);
+  }
+}
+
+connectToDatabase();
+
+const User = client.db().collection('users');
 
 // signup
 router.post('/signup', async (req, res) => {
@@ -23,11 +35,11 @@ router.post('/signup', async (req, res) => {
 
   // On encrypte le mot de passe tapé par l'utilisateur et on crée un nouvel User avec les données à sauvegarder
   const hashedMDP = await encryptMDP(10, password);
-  const newUser = new User({ surname, name, username, email, hashedMDP });
+  const newUser = { surname, name, username, email, hashedMDP };
 
   try {
-    const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    await User.insertOne(newUser);
+    res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur" });
   }
@@ -40,10 +52,10 @@ router.post('/login', async (req, res) => {
   try {
     // On récupère d'abord l'utilisateur dans la base de donnée (renvoie 401 s'il n'existe pas)
     const user = await User.findOne({ username });
-    if (user == null) res.status(401).json({ message: "Utilisateur non existant" });
+    if (!user) res.status(401).json({ message: "Utilisateur non existant" });
 
-    // On compare la valeur hachée du password donné à la valeur hachée stockée dans la bse
-    const passwordMatch = await bcrypt.compare(password, user.hashedMDP);
+    // On compare la valeur hachée du password donné à la valeur hachée stockée dans la base
+    const passwordMatch = bcrypt.compare(password, user.hashedMDP);
     if (!passwordMatch) return res.status(401).json({ message: 'Mot de passe erroné' });
 
     // On crée un token d'accès si tout s'est bien passé, on le stocke et on le renvoie
@@ -57,20 +69,4 @@ router.post('/login', async (req, res) => {
   }
 })
 
-// obtenir user en fonction d'un token
-router.get('/user', authenticateJWT, async (req, res) => {
-  try {
-    const username = req.user.username; // L'utilisateur est stocké dans req.user par le middleware authenticateJWT
-    const user = await User.findOne({ username }); // Recherche de l'utilisateur dans la base de données en utilisant le username extrait du token
-    if (!user) {
-      return res.status(404).json({ message: "Utilisateur non trouvé" });
-    }
-
-    res.json(user); // renvoi de l'utilisateur s'il est trouvé
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Erreur serveur" });
-  }
-});
 module.exports = router;

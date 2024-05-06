@@ -1,6 +1,11 @@
-const mongoose = require('mongoose')
+const { MongoClient, ObjectId } = require('mongodb');
 
-const usersSchema = new mongoose.Schema({ 
+// Connexion à la base de données MongoDB
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Schema de l'utilisateur
+const usersSchema = {
   surname: {
     type: String,
     required: true
@@ -30,7 +35,6 @@ const usersSchema = new mongoose.Schema({
   cover: {
     type: String,
     default: "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png"
-
   },
   photo: {
     type: String,
@@ -48,6 +52,19 @@ const usersSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   } 
-})
+};
 
-module.exports = mongoose.model('User', usersSchema) // pour intéragir avec le schema dans d'autres bases de données 
+async function connectToDatabase() {
+  try {
+    await client.connect();
+    console.log('Connected to the database');
+  } catch (error) {
+    console.error('Error connecting to the database: ', error);
+  }
+}
+
+connectToDatabase();
+
+const User = client.db().collection('users');
+
+module.exports = User;

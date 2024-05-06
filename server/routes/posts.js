@@ -1,8 +1,26 @@
-const express = require('express')
-const router = express.Router()
-const { Post, Answer } = require('../models/posts'); // Importer à la fois Post et Answer depuis le fichier models/posts.js
-const User = require('../models/users')
-const { authenticateJWT } = require('../middlewares/authentication')
+const express = require('express');
+const router = express.Router();
+const { MongoClient, ObjectId } = require('mongodb');
+const { authenticateJWT } = require('../middlewares/authentication');
+
+// Connexion à la base de données MongoDB
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+async function connectToDatabase() {
+  try {
+    await client.connect();
+    console.log('Connected to the database');
+  } catch (error) {
+    console.error('Error connecting to the database: ', error);
+  }
+}
+
+connectToDatabase();
+
+const Post = client.db().collection('posts');
+const Answer = client.db().collection('answers');
+const User = client.db().collection('users');
 
 // Recherche avec filtres dynamiques
 router.post('/post/search', async (req, res) => {
@@ -201,4 +219,4 @@ async function getPostsByAuthorId(authorId) {
 }
 
 
-module.exports = router // renvoie le routeur à server.js
+module.exports = router;
