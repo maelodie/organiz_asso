@@ -26,6 +26,18 @@ function ProfilPrivate() {
             .catch(error => {
                 console.error('Erreur lors de la récupération des posts', error);
             });
+
+        axios.get(`/users/${username}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                setUser(response.data);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des informations utilisateur', error);
+            });
     }, [username, posts]);
 
 
