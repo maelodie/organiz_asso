@@ -25,7 +25,7 @@ function PrivatePostList({username}) {
     return (
         <div>
             {posts.slice().reverse().map(postx => (
-                <Post post={postx} del={true} username={username} />
+                <Post key={postx._id} post={postx} del={true} username={username} />
             ))}
 
         </div>

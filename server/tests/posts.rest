@@ -62,7 +62,7 @@ GET http://localhost:4000/posts/
 
 ###
 # Récupération de tous les posts d'un utilisateur
-GET http://localhost:4000/posts/post/taylorswift13
+GET http://localhost:4000/posts/post/hp
 
 ###
 # Récupération d'un post précis
