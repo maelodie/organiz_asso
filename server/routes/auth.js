@@ -1,24 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { MongoClient, ObjectId } = require('mongodb');
 const { authenticateJWT, encryptMDP } = require('../middlewares/authentication');
-
-// Connexion à la base de données MongoDB
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-async function connectToDatabase() {
-  try {
-    await client.connect();
-    console.log('Connected to the database');
-  } catch (error) {
-    console.error('Error connecting to the database: ', error);
-  }
-}
-
-connectToDatabase();
-
-const User = client.db().collection('users');
+const  { User } = require('../database'); // userschema
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 // signup
 router.post('/signup', async (req, res) => {
@@ -51,7 +36,7 @@ router.post('/login', async (req, res) => {
 
   try {
     // On récupère d'abord l'utilisateur dans la base de donnée (renvoie 401 s'il n'existe pas)
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username : username });
     if (!user) res.status(401).json({ message: "Utilisateur non existant" });
 
     // On compare la valeur hachée du password donné à la valeur hachée stockée dans la base

@@ -1,26 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { MongoClient, ObjectId } = require('mongodb');
 const { authenticateJWT } = require('../middlewares/authentication');
-
-// Connexion à la base de données MongoDB
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-async function connectToDatabase() {
-  try {
-    await client.connect();
-    console.log('Connected to the database');
-  } catch (error) {
-    console.error('Error connecting to the database: ', error);
-  }
-}
-
-connectToDatabase();
-
-const Post = client.db().collection('posts');
-const Answer = client.db().collection('answers');
-const User = client.db().collection('users');
+const { Post, Answer , User}= require('../database')
 
 // Recherche avec filtres dynamiques
 router.post('/post/search', async (req, res) => {
@@ -57,14 +38,14 @@ router.post('/post/search', async (req, res) => {
 
 // création d'un nouveau post
 router.post('/', async (req, res) => {
-  const post = new Post({
+  const post = {
     author: req.body.author, // ID de l'utilisateur qui a créé le message
     message: req.body.message,
     privacy: req.body.privacy
-  });
+  };
 
   try {
-    const newPost = await post.save();
+    const newPost = await Post.insertOne(post);
     res.status(201).json(newPost);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -72,14 +53,14 @@ router.post('/', async (req, res) => {
 })
 
 router.post('/comment', async (req, res) => {
-  const comment = new Answer({
+  const comment = {
     author: req.body.author, // ID de l'utilisateur qui a créé le message
     message: req.body.message,
     privacy: req.body.privacy
-  });
+  };
 
   try {
-    const newComment = await comment.save();
+    const newComment = await Answer.insertOne(comment);
     res.status(201).json(newComment);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -98,13 +79,13 @@ router.post('/:username', async (req, res) => {
     }
 
     // Créer un nouveau message avec l'utilisateur trouvé
-    const post = new Post({
+    const post = {
       author: user._id,
       message: req.body.message,
       privacy: req.body.privacy
-    });
+    };
 
-    const newPost = await post.save();
+    const newPost = await Post.insertOne(post);
     res.status(201).json(newPost);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -129,7 +110,7 @@ router.patch('/:id', getPost, async (req, res) => {
     req.post.answers = req.body.answers
   }
   try {
-    const updatedPost = await req.post.save();
+    const updatedPost = await User.updateOne(req.post);
     res.json(updatedPost);
   } catch (err) {
     res.status(400).send({ message: err.message })

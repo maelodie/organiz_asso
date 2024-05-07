@@ -50,11 +50,11 @@ Content-Type: application/json
 
 ###
 # Pour supprimer un user
-DELETE http://localhost:4000/users/delete/taylorswift13
+DELETE http://localhost:4000/users/delete/immagetdeleeccfzefzfegrgtete
 
 ### 
 # Pour modifier les champs d'un user 
-PATCH http://localhost:4000/users/edit/aaaaa
+PATCH http://localhost:4000/users/edit/immagetdeleeccfzefzfegrgtete
 Content-Type: application/json
 
 {
@@ -64,7 +64,7 @@ Content-Type: application/json
 
 ###
 # Obtenir un user avec son username
-GET http://localhost:4000/users/663289f1097285bdf3e8c607
+GET http://localhost:4000/users/immagetdeleeccfzefzfegrgtete
 
 ### 
 # Obtenir un user avec son ID
@@ -73,4 +73,4 @@ GET http://localhost:4000/users/taylorswift13
 
 ###
 # Obtenir la liste des utilisateurs non validés
-GET http://localhost:4000/users/isNotValid
+GET http://localhost:4000/users/valid/no
