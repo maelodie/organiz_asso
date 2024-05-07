@@ -22,18 +22,51 @@ Content-Type: application/json
 }
 
 ###
-# Création d'un nouveau message
-POST http://localhost:4000/posts/johndoe
+
+# Pour créer un utilisateur avec les champs minimums
+POST http://localhost:4000/auth/signup
 Content-Type: application/json
 
 {
-  "author": "662d2cd94017ee680474caa0",
-  "message": "The tortured poets department is out now !",
+  "surname": "Taylor",
+  "name": "Swift",
+  "username": "taylorswift13",
+  "email": "taylorswift@gmail.com",
+  "password": "123456"
+}
+
+###
+# Création d'un nouveau message
+POST http://localhost:4000/posts/taylorswift13
+Content-Type: application/json
+
+{
+  "message": "Eras tour in 2 days!",
   "privacy": false
 }
 ###
+# Nouveau message à partir de /
+POST http://localhost:4000/posts/
+Content-Type: application/json
+
+{
+  "author": "taylorswift13",
+  "message": "Eras tour in 2 days! aekjjrakljrlka",
+  "privacy": false
+}
+
+###
 # Récupération de tous les posts 
 GET http://localhost:4000/posts/
+
+
+###
+# Récupération de tous les posts d'un utilisateur
+GET http://localhost:4000/posts/post/hp
+
+###
+# Récupération d'un post précis
+GET http://localhost:4000/posts/663a47c86a079a47528f378a
 
 ###
 # Récupération des posts privés
@@ -44,7 +77,10 @@ GET http://localhost:4000/posts/privatePosts
 GET http://localhost:4000/posts/publicPosts
 
 ###
-PATCH http://localhost:4000/posts/662d2d044017ee680474caa5
+# Suppression d'un post avec son id
+DELETE http://localhost:4000/posts/delete/663a47c86a079a47528f378a
+###
+PATCH http://localhost:4000/posts/663a47c86a079a47528f378a
 Content-Type: application/json
 
 {
@@ -60,5 +96,5 @@ POST http://localhost:4000/posts/post/search/
 Content-Type: application/json
 
 {
-  "keyword" : "coucou"
+  "keyword" : "Eras"
 }

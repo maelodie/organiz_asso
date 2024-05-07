@@ -15,28 +15,29 @@ function ProfilPrivate() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`/users/${username}`, {
+        axios.get(`/posts/post/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(response => {
-            setUser(response.data);
-            axios.get(`/posts/post/${response.data._id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
             .then(response => {
                 setPosts(response.data);
             })
             .catch(error => {
                 console.error('Erreur lors de la récupération des posts', error);
             });
+
+        axios.get(`/users/${username}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         })
-        .catch(error => {
-            console.error('Erreur lors de la récupération des informations utilisateur', error);
-        });
+            .then(response => {
+                setUser(response.data);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des informations utilisateur', error);
+            });
     }, [username, posts]);
 
 
@@ -47,7 +48,7 @@ function ProfilPrivate() {
             {user.admin ? <p id="user">{username} ⭐</p> : <p id="user">{username}</p>}
             <p>{user.bio}</p>
             {posts.slice().reverse().map(postx => (
-                <Post post={postx} del={false} username={username} />
+                <Post key={postx._id} post={postx} del={false} username={username} />
             ))}
         </div>
     );

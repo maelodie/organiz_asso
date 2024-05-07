@@ -36,7 +36,7 @@ function SearchResults() {
       <h1>Résultats </h1>
       {
         posts.slice().reverse().map(postx => (
-          <Post post={postx} del={false} />
+          <Post key={postx._id} post={postx} del={false} />
         ))
       }
     </div>

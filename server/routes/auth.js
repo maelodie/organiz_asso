@@ -1,12 +1,9 @@
-require('dotenv').config() // pour récupérer les données de .env
-const express = require('express')
-const session = require('express-session')
-const router = express.Router()
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
-const User = require('../models/users')
+const express = require('express');
+const router = express.Router();
 const { authenticateJWT, encryptMDP } = require('../middlewares/authentication');
-
+const  { User } = require('../database'); // userschema
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 // signup
 router.post('/signup', async (req, res) => {
@@ -23,11 +20,23 @@ router.post('/signup', async (req, res) => {
 
   // On encrypte le mot de passe tapé par l'utilisateur et on crée un nouvel User avec les données à sauvegarder
   const hashedMDP = await encryptMDP(10, password);
-  const newUser = new User({ surname, name, username, email, hashedMDP });
-
+  // Date d'inscription
+  const subscriptionDate = Date.now; 
+  // Photo de couverture 
+  const cover = "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png";
+  // Photo de profil
+  const photo = "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg";
+  // Biographie
+  const bio = "";
+  // Statut admin
+  const admin = false;
+  // Si l'inscription de l'utilisateur au site a été validée
+  const valid = false;
+  const newUser = { surname, name, username, email, hashedMDP, subscriptionDate, cover, photo, bio, admin, valid};
+  
   try {
-    const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    await User.insertOne(newUser);
+    res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur" });
   }
@@ -39,11 +48,11 @@ router.post('/login', async (req, res) => {
 
   try {
     // On récupère d'abord l'utilisateur dans la base de donnée (renvoie 401 s'il n'existe pas)
-    const user = await User.findOne({ username });
-    if (user == null) res.status(401).json({ message: "Utilisateur non existant" });
+    const user = await User.findOne({ username : username });
+    if (!user) res.status(401).json({ message: "Utilisateur non existant" });
 
-    // On compare la valeur hachée du password donné à la valeur hachée stockée dans la bse
-    const passwordMatch = await bcrypt.compare(password, user.hashedMDP);
+    // On compare la valeur hachée du password donné à la valeur hachée stockée dans la base
+    const passwordMatch = bcrypt.compare(password, user.hashedMDP);
     if (!passwordMatch) return res.status(401).json({ message: 'Mot de passe erroné' });
 
     // On crée un token d'accès si tout s'est bien passé, on le stocke et on le renvoie
@@ -57,20 +66,4 @@ router.post('/login', async (req, res) => {
   }
 })
 
-// obtenir user en fonction d'un token
-router.get('/user', authenticateJWT, async (req, res) => {
-  try {
-    const username = req.user.username; // L'utilisateur est stocké dans req.user par le middleware authenticateJWT
-    const user = await User.findOne({ username }); // Recherche de l'utilisateur dans la base de données en utilisant le username extrait du token
-    if (!user) {
-      return res.status(404).json({ message: "Utilisateur non trouvé" });
-    }
-
-    res.json(user); // renvoi de l'utilisateur s'il est trouvé
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Erreur serveur" });
-  }
-});
 module.exports = router;

@@ -52,6 +52,7 @@ function Home() {
                 <button id="button" onClick={goToProfil}>Profil</button>
             </div>
             <div id="Feed">
+                <h1>Bienvenue, {user && user.surname}! </h1>
                 <TextBox username={username} />
                 <PostList username={username} />
 

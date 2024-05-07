@@ -1,36 +1,32 @@
-const express = require('express')
-const router = express.Router()
-const { Post, Answer } = require('../models/posts'); // Importer à la fois Post et Answer depuis le fichier models/posts.js
-const User = require('../models/users')
-const { authenticateJWT } = require('../middlewares/authentication')
+const express = require('express');
+const router = express.Router();
+const { authenticateJWT } = require('../middlewares/authentication');
+const { Post, Answer, User } = require('../database')
+const { ObjectId } = require('mongodb')
 
 // Recherche avec filtres dynamiques
 router.post('/post/search', async (req, res) => {
-
   const { keyword, author, startDate, endDate } = req.body;
   const filters = {};
-  
-  if (keyword && keyword!=='') {
-    filters.$text = { $search: keyword };
+
+  if (keyword && keyword !== '') {
+    filters.message = { $regex: keyword, $options: 'i' }; // Utiliser l'option 'i' pour insensible à la casse
   }
-  if (author && author!=='') {
+  if (author && author !== '') {
     filters.author = author;
   }
 
-  if (startDate && endDate && startDate!=='' && endDate!=='') {
+  if (startDate && endDate && startDate !== '' && endDate !== '') {
     filters.sendingDate = { $gte: new Date(startDate), $lte: new Date(endDate) };
   }
-  
-  filters.privacy = "false";
 
-  console.log(filters)
+  filters.privacy = false; // Assurez-vous que c'est un booléen et non une chaîne
+
   try {
-    const posts = await Post.find(filters);
-    console.log(posts)
+    const posts = await Post.find(filters).toArray(); // Supprimer $and, car MongoDB interprétera cela comme une liste de conditions AND par défaut
     if (posts.length === 0) {
       return res.status(404).json({ message: "Aucun message trouvé" });
     }
-    
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -39,14 +35,15 @@ router.post('/post/search', async (req, res) => {
 
 // création d'un nouveau post
 router.post('/', async (req, res) => {
-  const post = new Post({
-    author: req.body.author, // ID de l'utilisateur qui a créé le message
+  const post = {
+    author: req.body.author, // username de l'utilisateur qui a créé le message
     message: req.body.message,
-    privacy: req.body.privacy
-  });
+    privacy: req.body.privacy,
+    answers: []
+  };
 
   try {
-    const newPost = await post.save();
+    const newPost = await Post.insertOne(post);
     res.status(201).json(newPost);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -54,14 +51,14 @@ router.post('/', async (req, res) => {
 })
 
 router.post('/comment', async (req, res) => {
-  const comment = new Answer({
-    author: req.body.author, // ID de l'utilisateur qui a créé le message
+  const comment = {
+    author: req.body.author, // username de l'utilisateur qui a créé le message
     message: req.body.message,
     privacy: req.body.privacy
-  });
+  };
 
   try {
-    const newComment = await comment.save();
+    const newComment = await Answer.insertOne(comment);
     res.status(201).json(newComment);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -74,19 +71,15 @@ router.post('/comment', async (req, res) => {
 router.post('/:username', async (req, res) => {
   try {
     const username = req.params.username;
-    const user = await User.findOne({ username: username }); // Trouver l'utilisateur par nom d'utilisateur
-    if (!user) {
-      return res.status(404).json({ message: 'Utilisateur non trouvé' });
-    }
 
     // Créer un nouveau message avec l'utilisateur trouvé
-    const post = new Post({
-      author: user._id,
+    const post = {
+      author: username,
       message: req.body.message,
       privacy: req.body.privacy
-    });
+    };
 
-    const newPost = await post.save();
+    const newPost = await Post.insertOne(post);
     res.status(201).json(newPost);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -95,23 +88,25 @@ router.post('/:username', async (req, res) => {
 
 // modification d'un post existant
 router.patch('/:id', getPost, async (req, res) => {
+  const { id } = req.post._id;
+  const updateFields = {}
   if (req.body.author != null) {
-    req.post.author = req.body.author
+    updateFields.author = req.body.author
   }
   if (req.body.message != null) {
-    req.post.message = req.body.message
+    updateFields.message = req.body.message
   }
   if (req.body.likes != null) {
-    req.post.likes = req.body.likes
+    updateFields.likes = req.body.likes
   }
   if (req.body.sendingDate != null) {
-    req.post.sendingDate = req.body.sendingDate
+    updateFields.sendingDate = req.body.sendingDate
   }
   if (req.body.answers != null) {
-    req.post.answers = req.body.answers
+    updateFields.answers = req.body.answers
   }
   try {
-    const updatedPost = await req.post.save();
+    const updatedPost = await Post.updateOne({ _id: new ObjectId(id) }, { $set: updateFields });
     res.json(updatedPost);
   } catch (err) {
     res.status(400).send({ message: err.message })
@@ -121,7 +116,7 @@ router.patch('/:id', getPost, async (req, res) => {
 // affiche la liste de tous les posts publics 
 router.get('/publicPosts', async (req, res) => {
   try {
-    const posts = await Post.find({ privacy: false })
+    const posts = await Post.find({ privacy: false }).toArray();
     res.json(posts)
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -131,7 +126,7 @@ router.get('/publicPosts', async (req, res) => {
 // affiche la liste de tous les posts privés 
 router.get('/privatePosts', async (req, res) => {
   try {
-    const posts = await Post.find({ privacy: true })
+    const posts = await Post.find({ privacy: true }).toArray();
     res.json(posts)
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -140,13 +135,18 @@ router.get('/privatePosts', async (req, res) => {
 
 // recherche d'un seul post
 router.get('/:id', getPost, (req, res) => {
-  res.json(res.post)
+  res.json(req.post)
+})
+
+// recherche d'un seul post
+router.get('/comment/:id', getComment, (req, res) => {
+  res.json(req.comment)
 })
 
 // affiche la liste de tous les posts de la base 
 router.get('/', async (req, res) => {
   try {
-    const posts = await Post.find()
+    const posts = await Post.find({}).toArray();
     res.json(posts)
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -155,7 +155,7 @@ router.get('/', async (req, res) => {
 
 router.delete('/delete/:id', getPost, async (req, res) => {
   try {
-    await req.post.deleteOne();
+    await Post.deleteOne(req.post);
     res.json({ message: 'Post supprimé avec succès' });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -163,12 +163,11 @@ router.delete('/delete/:id', getPost, async (req, res) => {
 });
 
 // affiche la liste de tous les posts de la base d'un utilisateur
-router.get('/post/:authorId', async (req, res) => {
+router.get('/post/:author', async (req, res) => {
   try {
-    const authorId = req.params.authorId;
-    const privacy = req.query.privacy === 'true'; // Récupérer le paramètre privacy de la requête et le convertir en boolean
-
-    const posts = await Post.find({ author: authorId, privacy: privacy });
+    const author = req.params.author;
+    
+    const posts = await Post.find({ author: author, privacy: false }).toArray();
     res.json(posts);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -180,7 +179,7 @@ router.get('/post/:authorId', async (req, res) => {
 async function getPost(req, res, next) {
   let post
   try {
-    post = await Post.findById(req.params.id)
+    post = await Post.findOne({ _id: new ObjectId(req.params.id) });
     if (!post) return res.status(404).json({ message: 'Message non trouvé' })
   } catch (err) {
     return res.status(500).json({ message: err.message })
@@ -189,16 +188,18 @@ async function getPost(req, res, next) {
   next()
 }
 
-// Fonction pour récupérer la liste des messages postés par un utilisateur avec un ID donné
-async function getPostsByAuthorId(authorId) {
+// fonction middleware pour trouver un commentaire précis
+async function getComment(req, res, next) {
+  let comment
   try {
-    // Recherche tous les messages qui ont l'auteur avec l'ID donné
-    const posts = await Post.find({ author: authorId });
-    return posts;
-  } catch (error) {
-    throw new Error('Erreur lors de la récupération des messages de l\'utilisateur : ' + error.message);
+    comment = await Answer.findOne({ _id: new ObjectId(req.params.id) });
+    if (!comment) return res.status(404).json({ message: 'Commentaire non trouvé' })
+  } catch (err) {
+    return res.status(500).json({ message: err.message })
   }
+  req.comment = comment
+  next()
 }
 
 
-module.exports = router // renvoie le routeur à server.js
+module.exports = router;
