@@ -68,7 +68,10 @@ function Profil() {
                 }
             });
             setIsEditing(false);
-            setUser(response.data);
+
+            // Recharger les données de l'utilisateur après la mise à jour
+            const userResponse = await axios.get(`/users/${username}`, { headers: { Authorization: `Bearer ${token}` } });
+            setUser(userResponse.data);
         } catch (error) {
             console.error('Erreur lors de la mise à jour du profil', error);
         }
