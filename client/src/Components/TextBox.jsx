@@ -14,17 +14,10 @@ function TextBox({username}){
         e.preventDefault(); // pour empecher le reload
         console.log(text);
     
-        try {
-            // On prend d'abord l'ID de l'utilisateur 
-            const response = await axios.get(`/users/${username}`, {
-                params: { username: username }, // Inclure les paramètres pour passer le nom d'utilisateur
-                headers: { Authorization: `Bearer ${token}`}
-            });
-            const id = response.data._id;
-    
+        try {    
             // On utilise l'id de l'utilisateur pour créer un nouveau message
             const newMessage = { 
-                "author": id,
+                "author": username,
                 "message": text,
                 "privacy": false
             };

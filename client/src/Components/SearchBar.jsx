@@ -13,28 +13,16 @@ function SearchBar() {
     const [endDate, setEndDate] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const token = localStorage.getItem('token');
-    let author;
 
     const handleSearch = async () => {
         if (!username && !keyword && !startDate && !endDate) {
             return;
         }
         try {
-            if (username) {
-                await axios.get(`/users/${username}`, { headers: { Authorization: `Bearer ${token}` } })
-                    .then(res => {
-                        if (res.data) {
-                            author = res.data._id;
-                        }
-                    })
-                    .catch(err => {
-                        console.error("Erreur lors de la recherche de l'ID de l'utilisateur", err);
-                    });
-            }
 
             const query = JSON.stringify({
                 keyword: keyword,
-                author: author,
+                author: username,
                 startDate: startDate,
                 endDate: endDate
             });

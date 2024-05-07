@@ -20,8 +20,20 @@ router.post('/signup', async (req, res) => {
 
   // On encrypte le mot de passe tapé par l'utilisateur et on crée un nouvel User avec les données à sauvegarder
   const hashedMDP = await encryptMDP(10, password);
-  const newUser = { surname, name, username, email, hashedMDP };
-
+  // Date d'inscription
+  const subscriptionDate = Date.now; 
+  // Photo de couverture 
+  const cover = "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png";
+  // Photo de profil
+  const photo = "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg";
+  // Biographie
+  const bio = "";
+  // Statut admin
+  const admin = false;
+  // Si l'inscription de l'utilisateur au site a été validée
+  const valid = false;
+  const newUser = { surname, name, username, email, hashedMDP, subscriptionDate, cover, photo, bio, admin, valid};
+  
   try {
     await User.insertOne(newUser);
     res.status(201).json(newUser);

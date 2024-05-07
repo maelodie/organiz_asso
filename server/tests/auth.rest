@@ -3,11 +3,11 @@ POST http://localhost:4000/auth/signup
 Content-Type: application/json
 
 {
-  "name": "name5",
-  "surname": "surname5",
-  "username": "user5",
-  "email": "user5@gmail.com",
-  "password": "user5"
+  "name": "name6",
+  "surname": "surname6",
+  "username": "user6",
+  "email": "user6@gmail.com",
+  "password": "user6"
 }
 
 ###

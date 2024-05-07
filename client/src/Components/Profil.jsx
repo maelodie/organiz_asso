@@ -36,7 +36,7 @@ function Profil() {
     
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`/posts/post/${user._id}`, { params: { privacy: false } },  {
+        axios.get(`/posts/post/${username}`, { params: { privacy: false } },  {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -47,7 +47,7 @@ function Profil() {
         .catch(error => {
             console.error('Erreur lors de la récupération des posts', error);
         });
-    }, [user._id, posts]);
+    }, [posts, username]);
     
 
     const handleEdit = () => {
@@ -58,7 +58,7 @@ function Profil() {
         e.preventDefault();
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.patch(`/users/edit/${user._id}`, {
+            const response = await axios.patch(`/users/edit/${username}`, {
                 cover,
                 photo,
                 bio
