@@ -138,6 +138,11 @@ router.get('/:id', getPost, (req, res) => {
   res.json(req.post)
 })
 
+// recherche d'un seul post
+router.get('/comment/:id', getComment, (req, res) => {
+  res.json(req.comment)
+})
+
 // affiche la liste de tous les posts de la base 
 router.get('/', async (req, res) => {
   try {
@@ -181,6 +186,19 @@ async function getPost(req, res, next) {
     return res.status(500).json({ message: err.message })
   }
   req.post = post
+  next()
+}
+
+// fonction middleware pour trouver un commentaire précis
+async function getComment(req, res, next) {
+  let comment
+  try {
+    comment = await Answer.findOne({ _id: new ObjectId(req.params.id) });
+    if (!comment) return res.status(404).json({ message: 'Commentaire non trouvé' })
+  } catch (err) {
+    return res.status(500).json({ message: err.message })
+  }
+  req.comment = comment
   next()
 }
 

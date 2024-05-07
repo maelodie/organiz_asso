@@ -8,13 +8,22 @@ import Heart from 'react-heart'
 import moment from 'moment';
 axios.defaults.baseURL = 'http://localhost:4000'
 
-function Comment({ post, del }) {
+function Comment({ id, del }) {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const token = localStorage.getItem("token");
     const [active, setActive] = useState(false); //pour le coeur
+    const [post, setPost] = useState(""); //pour le coeur
 
     useEffect(() => {
+        axios.get(`posts/comment/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => {
+            setPost(response.data);
+        })
+        .catch(error => {
+            console.error('Erreur', error);
+        });
+
         if (post.author) {
             axios.get(`users/${post.author}`, {
                 headers: {
@@ -28,6 +37,8 @@ function Comment({ post, del }) {
                 console.error('Erreur', error);
             });
         }
+
+
     }, [post.author]);
 
     if (!user) {
