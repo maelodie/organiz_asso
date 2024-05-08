@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:4000';
@@ -9,10 +9,14 @@ function Login() {
     // State pour gérer les champs de formulaire
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(false)
+    const [textError, setTextError] = useState('')
 
     // Fonction pour soumettre le formulaire
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setError(false);
+        
         const credentials = {
             "username": username,
             "password": password
@@ -21,6 +25,7 @@ function Login() {
         try {
 
             const response = await axios.post('/auth/login', credentials);
+            
             if (response.status === 200) {
                 localStorage.setItem("token", response.data.token) // on store le token localement 
 
@@ -48,6 +53,8 @@ function Login() {
             }
 
         } catch (error) {
+            setError(true);
+            setTextError("Cet utilisateur n'existe pas ou le mot de passe est erroné.");
             console.error('Erreur', error);
         }
     };
@@ -73,6 +80,7 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    {error && <p>{textError} </p>}
                 </div>
                 <button type="submit">Se connecter</button>
             </form>

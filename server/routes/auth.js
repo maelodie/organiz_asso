@@ -7,14 +7,14 @@ const jwt = require('jsonwebtoken')
 
 // signup
 router.post('/signup', async (req, res) => {
-  const { surname, name, username, email, password } = req.body;
+  const { surname, name, username, email, password, confirm} = req.body;
 
   // On vérifie d'abord si l'utilisateur existe déjà (et on ne crée rien dans ce cas)
   const existingUser = await User.findOne({ username });
-  if (existingUser) res.status(409).json({ message: "Ce nom d'utilisateur est déjà utilisé." })
+  if (existingUser) return res.status(409).json({ message: "Ce nom d'utilisateur est déjà utilisé." })
 
   // On regarde si tous les champs sont complets
-  if (!surname || !name || !username || !email || !password) {
+  if (!surname || !name || !username || !email || !password || !confirm) {
     return res.status(400).json({ message: "Tous les champs doivent être remplis." });
   }
 
@@ -23,9 +23,9 @@ router.post('/signup', async (req, res) => {
   // Date d'inscription
   const subscriptionDate = Date.now; 
   // Photo de couverture 
-  const cover = "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png";
+  const cover = "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png"; // Valeur par défaut
   // Photo de profil
-  const photo = "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg";
+  const photo = "https://as2.ftcdn.net/v2/jpg/03/46/93/61/1000_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg"; // Valeur par défaut 
   // Biographie
   const bio = "";
   // Statut admin
@@ -49,11 +49,12 @@ router.post('/login', async (req, res) => {
   try {
     // On récupère d'abord l'utilisateur dans la base de donnée (renvoie 401 s'il n'existe pas)
     const user = await User.findOne({ username : username });
-    if (!user) res.status(401).json({ message: "Utilisateur non existant" });
+    if (!user) return res.status(401).json({ message: "Utilisateur non existant" });
+    if (!user.hashedMDP) return res.status(401).json({ message: "Erreur d'authentification" });
 
     // On compare la valeur hachée du password donné à la valeur hachée stockée dans la base
     const passwordMatch = bcrypt.compare(password, user.hashedMDP);
-    if (!passwordMatch) return res.status(401).json({ message: 'Mot de passe erroné' });
+    if (!passwordMatch) res.status(401).json({ message: 'Mot de passe erroné' });
 
     // On crée un token d'accès si tout s'est bien passé, on le stocke et on le renvoie
     const token = jwt.sign(req.body, process.env.ACCESS_TOKEN_KEY, { expiresIn: '1h' });

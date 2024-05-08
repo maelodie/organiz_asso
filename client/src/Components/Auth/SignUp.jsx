@@ -14,6 +14,8 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState(false);
+    const [textError, setTextError] = useState('');
 
     // Fonction pour soumettre le formulaire
     const handleSubmit = (event) => {
@@ -29,7 +31,8 @@ function SignUp() {
                 "name": lastName,
                 "username": username,
                 "email": email,
-                "password": password
+                "password": password,
+                "confirm" : confirmPassword
             };
 
             axios.post('auth/signup', credentials)
@@ -40,13 +43,14 @@ function SignUp() {
                     }
                 })
                 .catch(error => {
+                    setError(true)
                     if (error.response && error.response.status === 409) {
                         // Erreur 409 spécifique
-                        alert("Ce nom d'utilisateur existe déjà.");
+                        setTextError("Ce nom d'utilisateur existe déjà.");
                     } else {
                         // Autres erreurs
                         console.error('Erreur', error);
-                        alert("Une erreur s'est produite lors de la communication avec le serveur.");
+                        setTextError("Une erreur s'est produite lors de la communication avec le serveur.");
                     }
                 });
 
@@ -111,6 +115,9 @@ function SignUp() {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                     />
+                </div>
+                <div>
+                    {error && <p>{textError} </p>}
                 </div>
                 <button type="submit">S'inscrire</button>
             </form>
