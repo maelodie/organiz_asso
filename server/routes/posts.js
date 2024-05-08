@@ -39,6 +39,7 @@ router.post('/', async (req, res) => {
     author: req.body.author, // username de l'utilisateur qui a créé le message
     message: req.body.message,
     privacy: req.body.privacy,
+    likes: [], // Liste des utilisateurs ayant liké le message
     answers: []
   };
 
@@ -54,6 +55,7 @@ router.post('/comment', async (req, res) => {
   const comment = {
     author: req.body.author, // username de l'utilisateur qui a créé le message
     message: req.body.message,
+    likes: [],
     privacy: req.body.privacy
   };
 

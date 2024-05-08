@@ -47,16 +47,22 @@ function Post({ post, del, username }) {
         navigate(`/profilePrivate/${user.username}`, { state: { username: user.username } });
     };
 
+    // Fonction de gestion du bouton de like
     const Like = () => {
-        // Obtention de la valeur actuelle des likes
-        const currentLikes = post.likes;
+        let userLiked = [...post.likes]; // liste des personnes qui ont likés
 
-        // Mise à jour locale de la valeur des likes (incrémentation)
-        const updatedLikes = currentLikes + 1;
+        // Mise à jour 
+        if(userLiked.includes(user.username)) { // si le user a déjà liké il unlike
+            userLiked = userLiked.filter(userLiked => userLiked !== user.username);
+            setActive(false);
+        } else { // si le user n'a pas encore liké, il like
+            userLiked.push(user.username);
+            setActive(true);
+        }
 
-        // Préparation des données à envoyer dans la requête PATCH
+        // Envoi vers les serveurs
         const credentials = {
-            likes: updatedLikes
+            likes: userLiked
         };
 
         axios.patch(`/posts/${post._id}`, credentials, {
@@ -67,7 +73,6 @@ function Post({ post, del, username }) {
             .catch(error => {
                 console.error('Erreur', error);
             })
-        setActive(!active)
     };
 
     // temps écoulé depuis la date de publication
@@ -99,7 +104,7 @@ function Post({ post, del, username }) {
                 <div id="likes">
                     <div style={{ width: "1.7rem" }}>
                         <Heart id="heart" isActive={active} onClick={Like} />
-                        <p>{post.likes}</p>
+                        <p>{post.likes.length}</p>
                     </div>
                     <button id="commentairesButton" onClick={handleShowMore}>{showMore ? "Afficher les commentaires" : "Masquer les commentaires"}</button>
                 </div>
