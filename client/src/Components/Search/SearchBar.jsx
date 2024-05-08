@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaSearch } from 'react-icons/fa'; // Importer l'icône de loupe
 import './SearchBar.css'; // Style CSS pour la barre de recherche
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 function SearchBar() {
     const navigate = useNavigate();

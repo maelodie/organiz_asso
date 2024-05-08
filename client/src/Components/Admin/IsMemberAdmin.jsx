@@ -1,7 +1,7 @@
 import React from 'react';
 import "./PendingMember.css"
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:4000/api'
 
 
 function isMemberAdmin({user}) {

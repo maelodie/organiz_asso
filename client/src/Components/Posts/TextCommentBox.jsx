@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../Feed/PublicFeed/TextBox.css';
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:4000/api'
 
 function TextCommentBox({username, post}){
     // State pour gérer les champs de formulaire

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './TextBox.css';
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:4000/api'
 
 function TextBox({username}){
     // State pour gérer les champs de formulaire

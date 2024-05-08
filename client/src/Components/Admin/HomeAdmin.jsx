@@ -6,7 +6,7 @@ import SearchBar from '../Search/SearchBar';
 import TextBox from '../Feed/PublicFeed/TextBox';
 import PostList from '../Feed/PublicFeed/PostList';
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:4000/api'
 
 function HomeAdmin() {
     const navigate = useNavigate();

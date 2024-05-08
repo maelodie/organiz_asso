@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import './Profil.css';
 import Post from '../Posts/Post'
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 function Profil() {
     const location = useLocation();

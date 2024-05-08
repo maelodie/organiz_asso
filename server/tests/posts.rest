@@ -1,5 +1,5 @@
 # Création d'un nouvel utilisateur qui va poster des messages
-POST http://localhost:4000/auth/signup
+POST http://localhost:4000/api/auth/signup
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###
 # Connexion de l'utilisateur
-POST http://localhost:4000/auth/login
+POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 ###
 
 # Pour créer un utilisateur avec les champs minimums
-POST http://localhost:4000/auth/signup
+POST http://localhost:4000/api/auth/signup
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 
 ###
 # Création d'un nouveau message
-POST http://localhost:4000/posts/taylorswift13
+POST http://localhost:4000/api/posts/taylorswift13
 Content-Type: application/json
 
 {
@@ -46,7 +46,7 @@ Content-Type: application/json
 }
 ###
 # Nouveau message à partir de /
-POST http://localhost:4000/posts/
+POST http://localhost:4000/api/posts/
 Content-Type: application/json
 
 {
@@ -57,30 +57,30 @@ Content-Type: application/json
 
 ###
 # Récupération de tous les posts 
-GET http://localhost:4000/posts/
+GET http://localhost:4000/api/posts/
 
 
 ###
 # Récupération de tous les posts d'un utilisateur
-GET http://localhost:4000/posts/post/hp
+GET http://localhost:4000/api/posts/post/hp
 
 ###
 # Récupération d'un post précis
-GET http://localhost:4000/posts/663a47c86a079a47528f378a
+GET http://localhost:4000/api/posts/663a47c86a079a47528f378a
 
 ###
 # Récupération des posts privés
-GET http://localhost:4000/posts/privatePosts
+GET http://localhost:4000/api/posts/privatePosts
 
 ###
 # Récupération des posts publics
-GET http://localhost:4000/posts/publicPosts
+GET http://localhost:4000/api/posts/publicPosts
 
 ###
 # Suppression d'un post avec son id
-DELETE http://localhost:4000/posts/delete/663a47c86a079a47528f378a
+DELETE http://localhost:4000/api/posts/delete/663a47c86a079a47528f378a
 ###
-PATCH http://localhost:4000/posts/663a47c86a079a47528f378a
+PATCH http://localhost:4000/api/posts/663a47c86a079a47528f378a
 Content-Type: application/json
 
 {
@@ -88,11 +88,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:4000/posts/662d2d044017ee680474caa5
+GET http://localhost:4000/api/posts/662d2d044017ee680474caa5
 
 ###
 
-POST http://localhost:4000/posts/post/search/ 
+POST http://localhost:4000/api/posts/post/search/ 
 Content-Type: application/json
 
 {

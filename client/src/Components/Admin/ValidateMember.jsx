@@ -2,7 +2,7 @@ import React from 'react';
 import PendingMember from './PendingMember';
 import "./ValidateMember.css"
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:4000/api'
 import { useState, useEffect } from 'react';
 
 function ValidateMember() {

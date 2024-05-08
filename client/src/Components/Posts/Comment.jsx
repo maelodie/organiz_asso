@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Comment.css'
 import Heart from 'react-heart'
 import moment from 'moment';
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:4000/api'
 
 function Comment({ id, del }) {
     const navigate = useNavigate();

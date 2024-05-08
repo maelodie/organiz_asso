@@ -7,7 +7,7 @@ import Heart from 'react-heart'
 import TextCommentBox from './TextCommentBox';
 import CommentList from './CommentList'
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:4000/api'
 
 function Post({ post, del, username }) {
     const navigate = useNavigate();

@@ -19,16 +19,16 @@ app.use(session({
 
 // redirection de toutes les requêtes comportant '/users' vers 'routes/users'
 const usersRouter = require('./routes/users') 
-app.use('/users', usersRouter) 
+app.use('/api/users', usersRouter) 
 
 // redirection de toutes les requêtes comportant '/posts' vers 'routes/posts'
 const postRouter = require('./routes/posts')
-app.use('/posts', postRouter)
+app.use('/api/posts', postRouter)
 
 const authRouter = require('./routes/auth')
-app.use('/auth', authRouter)
+app.use('/api/auth', authRouter)
 
-app.get('/test-session', (req, res) => {
+app.get('/api/test-session', (req, res) => {
   if (req.session.accessToken) {
       res.json({ accessToken: req.session.accessToken });
   } else {
