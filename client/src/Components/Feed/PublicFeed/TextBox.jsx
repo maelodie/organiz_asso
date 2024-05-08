@@ -12,7 +12,6 @@ function TextBox({username}){
     // Gestion de la soumission
     const handleSubmit = async (e) => {
         e.preventDefault(); // pour empecher le reload
-        console.log(text);
     
         try {    
             // On utilise l'id de l'utilisateur pour créer un nouveau message
@@ -21,7 +20,6 @@ function TextBox({username}){
                 "message": text,
                 "privacy": false
             };
-            console.log(newMessage);
     
             // Envoi du nouveau message
             const postResponse = await axios.post('/posts/', newMessage, {
@@ -30,7 +28,6 @@ function TextBox({username}){
                 }
             });
             if(postResponse.status === 201) {
-                console.log("Le message a bien été créé");
                 setText("");
             }
         } catch (error) {

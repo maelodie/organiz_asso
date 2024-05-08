@@ -21,7 +21,6 @@ function PrivateTextBox({username}){
                 "message": text,
                 "privacy": true
             };
-            console.log(newMessage);
     
             // Envoi du nouveau message
             const postResponse = await axios.post('/posts/', newMessage, {
@@ -30,7 +29,6 @@ function PrivateTextBox({username}){
                 }
             });
             if(postResponse.status === 201) {
-                console.log("Le message a bien été créé");
                 setText("");
             }
         } catch (error) {

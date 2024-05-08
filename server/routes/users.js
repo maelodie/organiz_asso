@@ -44,7 +44,6 @@ router.delete('/delete/:identifier', getUser, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const users = await User.find({}).toArray();
-    console.log(users)
     res.json(users)
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -86,7 +85,6 @@ router.patch('/edit/:identifier', getUser, async (req, res) => {
   if (req.body.admin != null) {
     updateFields.admin = req.body.admin
   }
-  console.log(updateFields)
   try {
     const updatedUser = await User.updateOne({ username : identifier }, { $set: updateFields });    
     res.json(updatedUser);

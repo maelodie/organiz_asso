@@ -28,9 +28,6 @@ function SearchResults() {
     fetchPosts(); // Appel de la fonction d'asynchrone
   }, [query, token]); // Effectue l'appel seulement si query ou token change
 
-  console.log(posts.length)
-  console.log(posts);
-
   return (
     <div>
       <h1>Résultats </h1>

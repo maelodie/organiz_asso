@@ -26,7 +26,6 @@ function SearchBar() {
                 startDate: startDate,
                 endDate: endDate
             });
-            console.log(query);
             navigate('/search', { state: { query: query } });
         } catch (error) {
             console.error('Erreur lors de la recherche de messages', error);

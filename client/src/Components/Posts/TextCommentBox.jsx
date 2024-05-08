@@ -12,8 +12,6 @@ function TextCommentBox({username, post}){
     // Gestion de la soumission
     const handleSubmit = async (e) => {
         e.preventDefault(); // pour empecher le reload
-        console.log(text);
-        console.log(username);
     
         try {
     
@@ -23,7 +21,6 @@ function TextCommentBox({username, post}){
                 "message": text,
                 "privacy": false
             };
-            console.log(newMessage);
     
             // Envoi du nouveau message
             const postResponse = await axios.post('/posts/comment', newMessage, {
@@ -45,8 +42,7 @@ function TextCommentBox({username, post}){
                         Authorization: `Bearer ${token}`
                     }
                 });
-
-                console.log("Le commentaire a bien été ajouté");
+                
                 setText("");
             })
         } catch (error) {

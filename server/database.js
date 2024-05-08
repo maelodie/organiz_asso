@@ -3,11 +3,9 @@ const { MongoClient } = require('mongodb');
 
 const uri = process.env.DATABASE_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-console.log(uri)
 async function connectToDatabase() {
   try {
     await client.connect();
-    console.log('Connected to the database');
   } catch (error) {
     console.error('Error connecting to the database: ', error);
   }
