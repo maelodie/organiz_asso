@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Post from './Post'
+import Post from '../Posts/Post'
 import { useLocation } from 'react-router-dom';
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:4000'

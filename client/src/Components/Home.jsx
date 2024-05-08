@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Home.css';
 import axios from 'axios';
-import SearchBar from './SearchBar';
-import TextBox from './TextBox';
-import PostList from './PostList';
+import SearchBar from './Search/SearchBar';
+import TextBox from './Feed/PublicFeed/TextBox';
+import PostList from './Feed/PublicFeed/PostList';
 axios.defaults.baseURL = 'http://localhost:4000'
 
 function Home() {

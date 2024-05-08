@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import TextCommentBox from './TextCommentBox';
-import CommentList from './CommentList';
 import './Comment.css'
 import Heart from 'react-heart'
 import moment from 'moment';

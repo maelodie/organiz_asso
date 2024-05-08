@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useLocation } from 'react-router-dom';
-import Post from './Post';
+import Post from '../../Posts/Post';
 import PrivatePostLists from './PrivatePostList';
 import PrivateTextBox from './PrivateTextBox';
 import './PrivateForum.css'

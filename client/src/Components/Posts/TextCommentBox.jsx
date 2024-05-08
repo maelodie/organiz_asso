@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './TextBox.css';
+import '../Feed/PublicFeed/TextBox.css';
 import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:4000'

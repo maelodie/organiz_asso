@@ -1,17 +1,17 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './Components/Login';
-import SignUp from './Components/SignUp';
-import Start from './Components/Start'
+import Login from './Components/Auth/Login';
+import SignUp from './Components/Auth/SignUp';
+import Start from './Components/Auth/Start'
 import Home from './Components/Home'
-import Profil from './Components/Profil';
-import PrivateForum from './Components/PrivateForum';
-import ValidateMember from './Components/ValidateMember';
-import WaitingRoom from './Components/WaitingRoom';
-import HomeAdmin from './Components/HomeAdmin';
-import ValidateAdmin from './Components/ValidateAdmin';
-import ProfilPrivate from './Components/ProfilPrivate';
-import SearchResults from './Components/SearchResults'
+import Profil from './Components/UserProfile/Profil';
+import PrivateForum from './Components/Feed/PrivateFeed/PrivateForum';
+import ValidateMember from './Components/Admin/ValidateMember';
+import WaitingRoom from './Components/Auth/WaitingRoom';
+import HomeAdmin from './Components/Admin/HomeAdmin';
+import ValidateAdmin from './Components/Admin/ValidateAdmin';
+import ProfilPrivate from './Components/UserProfile/ProfilPrivate';
+import SearchResults from './Components/Search/SearchResults'
 import './App.css'
 
 function App() {
