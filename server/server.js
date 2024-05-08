@@ -17,13 +17,6 @@ app.use(session({
   saveUninitialized: true
 }))
 
-// connection à la base de donnée
-async function connexionBD() {
-  const client = new MongoClient(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-  await client.connect();
-  return client.db("Organiz'Asso BD"); 
-}
-
 // redirection de toutes les requêtes comportant '/users' vers 'routes/users'
 const usersRouter = require('./routes/users') 
 app.use('/users', usersRouter) 
@@ -46,4 +39,3 @@ app.get('/test-session', (req, res) => {
 
 // démarrage du serveur
 app.listen(PORT, () => console.log('Le serveur est en marche'))
-module.exports = connexionBD;
