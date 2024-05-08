@@ -52,11 +52,11 @@ function Post({ post, del, username }) {
         let userLiked = [...post.likes]; // liste des personnes qui ont likés
 
         // Mise à jour 
-        if(userLiked.includes(user.username)) { // si le user a déjà liké il unlike
-            userLiked = userLiked.filter(userLiked => userLiked !== user.username);
+        if(userLiked.includes(username)) { // si le user a déjà liké il unlike
+            userLiked = userLiked.filter(userLiked => userLiked !== username);
             setActive(false);
         } else { // si le user n'a pas encore liké, il like
-            userLiked.push(user.username);
+            userLiked.push(username);
             setActive(true);
         }
 
