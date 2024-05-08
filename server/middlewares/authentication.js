@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt')
 // Middleware d'authentification JWT
 function authenticateJWT(req, res, next) {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Format attendu : 'Bearer <token>'
-  
+  const token = authHeader.split(' ')[1]; // Format attendu : 'Bearer <token>'
+
   if (token) {
     jwt.verify(token, process.env.ACCESS_TOKEN_KEY, (err, user) => {
       if (err) {

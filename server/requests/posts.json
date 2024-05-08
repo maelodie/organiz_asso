@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "771aae14-4af7-4d3c-89c6-3ca2b222162c",
+		"name": "Posts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32546287"
+	},
+	"item": [
+		{
+			"name": "add new message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTcxNTE4NTAzNywiZXhwIjoxNzE1MTg4NjM3fQ.P18qMZy1svppGk7H4uxZayFqarRN69IvmPFOCt3z87g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"author\" : \"maevaelodie\",\n    \"message\" : \"I'm going to the eras tour tomorrow\",\n    \"privacy\" : \"false\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/posts/"
+			},
+			"response": []
+		},
+		{
+			"name": "search message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTcxNTE4NTAzNywiZXhwIjoxNzE1MTg4NjM3fQ.P18qMZy1svppGk7H4uxZayFqarRN69IvmPFOCt3z87g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"keyword\" : \"maybe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/posts/post/search"
+			},
+			"response": []
+		},
+		{
+			"name": "edit message",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTcxNTE4NTAzNywiZXhwIjoxNzE1MTg4NjM3fQ.P18qMZy1svppGk7H4uxZayFqarRN69IvmPFOCt3z87g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\" : \"i am special\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/posts/663b9f7ed35344f53033a958"
+			},
+			"response": []
+		},
+		{
+			"name": "delete message",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTcxNTE4NTAzNywiZXhwIjoxNzE1MTg4NjM3fQ.P18qMZy1svppGk7H4uxZayFqarRN69IvmPFOCt3z87g",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:4000/api/posts/delete/663b9f7ed35344f53033a958"
+			},
+			"response": []
+		}
+	]
+}

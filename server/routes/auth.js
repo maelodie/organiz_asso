@@ -14,7 +14,7 @@ router.post('/signup', async (req, res) => {
   if (existingUser) return res.status(409).json({ message: "Ce nom d'utilisateur est déjà utilisé." })
 
   // On regarde si tous les champs sont complets
-  if (!surname || !name || !username || !email || !password || !confirm) {
+  if (!surname || !name || !username || !email || !password) {
     return res.status(400).json({ message: "Tous les champs doivent être remplis." });
   }
 

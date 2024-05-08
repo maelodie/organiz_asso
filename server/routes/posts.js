@@ -4,6 +4,9 @@ const { authenticateJWT } = require('../middlewares/authentication');
 const { Post, Answer, User } = require('../database')
 const { ObjectId } = require('mongodb')
 
+// L'utilisateur doit être connecté(on lui a donné un token) pour pouvoir accéder aux services
+router.use(authenticateJWT)
+
 // Recherche avec filtres dynamiques
 router.post('/post/search', async (req, res) => {
   const { keyword, author, startDate, endDate } = req.body;

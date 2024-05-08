@@ -1,1 +1,0 @@
-npm install --save-dev dotenv nodemon: pour installer nodemon

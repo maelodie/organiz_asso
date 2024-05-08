@@ -4,47 +4,24 @@ const { authenticateJWT, encryptMDP } = require('../middlewares/authentication')
 const { User } = require('../database')
 const { ObjectID } = require('mongodb')
 
-// createUser: créer un nouvel utilisateur
-router.post('/', async (req, res) => {
-  const { surname, name, username, email, password, cover, photo, bio, valid, admin } = req.body;
-
-  // On vérifie d'abord si l'utilisateur existe déjà (et on ne crée rien dans ce cas)
-  const existingUser = await User.findOne({ username });
-  if (existingUser) res.status(409).json({ message: "Ce nom d'utilisateur est déjà utilisé." })
-
-  // On regarde si tous les champs sont complets
-  if (!surname || !name || !username || !email || !password) {
-    return res.status(400).json({ message: "Remplir les champs obligatoires." });
-  }
-
-  // On encrypte le mot de passe tapé par l'utilisateur et on crée un nouvel User avec les données à sauvegarder
-  const hashedMDP = await encryptMDP(10, password);
-  const newUser = { surname, name, username, email, hashedMDP, cover, photo, bio, valid, admin };
-
-  try {
-    const savedUser = await User.insertOne(newUser);
-    res.status(201).json(savedUser);
-  } catch (error) {
-    res.status(500).json({ message: "Erreur serveur" });
-  }
-})
-
-
-// deleteUser: permet de supprimer un utilisateur de la base de données users
-router.delete('/delete/:identifier', getUser, async (req, res) => {
-  try {
-    await User.deleteOne(req.userData);
-    res.json({ message: 'Utilisateur supprimé' })
-  } catch (err) {
-    res.status(500).json({ message: err.message })
-  }
-})
+// L'utilisateur doit être connecté(on lui a donné un token) pour pouvoir accéder aux services
+router.use(authenticateJWT)
 
 // getListUsers: permet d'afficher la liste des utilisateurs dans la base
 router.get('/', async (req, res) => {
   try {
     const users = await User.find({}).toArray();
     res.json(users)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
+// deleteUser: permet de supprimer un utilisateur de la base de données users
+router.delete('/delete/:identifier', getUser, async (req, res) => {
+  try {
+    await User.deleteOne(req.userData);
+    res.json({ message: 'Utilisateur supprimé' })
   } catch (err) {
     res.status(500).json({ message: err.message })
   }
