@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateJWT, encryptMDP } = require('../middlewares/authentication');
+const { encryptMDP } = require('../middlewares/authentication');
 const  { User } = require('../database'); // userschema
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -58,7 +58,6 @@ router.post('/login', async (req, res) => {
 
     // On crée un token d'accès si tout s'est bien passé, on le stocke et on le renvoie
     const token = jwt.sign(req.body, process.env.ACCESS_TOKEN_KEY, { expiresIn: '1h' });
-    req.session.token = token;
     res.status(200).json({ message: "Connexion réussie", token: token });
   
   } catch (error) {
