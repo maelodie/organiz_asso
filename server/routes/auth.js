@@ -53,16 +53,15 @@ router.post('/login', async (req, res) => {
     if (!user.hashedMDP) return res.status(401).json({ message: "Erreur d'authentification" });
 
     // On compare la valeur hachée du password donné à la valeur hachée stockée dans la base
-    const passwordMatch = bcrypt.compare(password, user.hashedMDP);
-    if (!passwordMatch) res.status(401).json({ message: 'Mot de passe erroné' });
+    const passwordMatch = await bcrypt.compare(password, user.hashedMDP);
+    if (!passwordMatch) return res.status(401).json({ message: 'Mot de passe erroné' });
 
     // On crée un token d'accès si tout s'est bien passé, on le stocke et on le renvoie
     const token = jwt.sign(req.body, process.env.ACCESS_TOKEN_KEY, { expiresIn: '1h' });
-    res.status(200).json({ message: "Connexion réussie", token: token });
+    return res.status(200).json({ message: "Connexion réussie", token: token });
   
   } catch (error) {
-    console.error(error)
-    res.status(500).json({ message: "Erreur dans le serveur " })
+    return res.status(500).json({ message: "Erreur dans le serveur " })
   }
 })
 

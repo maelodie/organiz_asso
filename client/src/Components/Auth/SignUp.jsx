@@ -22,7 +22,7 @@ function SignUp() {
         event.preventDefault();
 
         if (password != confirmPassword) {
-            alert("Les mot des passe ne sont pas identiques");
+            alert("Les mots des passe ne sont pas identiques");
 
         } else {
 

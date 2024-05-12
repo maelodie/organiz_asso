@@ -35,7 +35,7 @@ function Profil() {
     }, [username]);
     
     useEffect(() => {
-        const token = localStorage.getItem("token"); // Retrieve the token from localStorage
+        const token = localStorage.getItem("token"); 
         axios.get(`/posts/post/${username}`, {
             params: { privacy: false },
             headers: {
