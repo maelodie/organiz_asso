@@ -35,8 +35,9 @@ function Profil() {
     }, [username]);
     
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        axios.get(`/posts/post/${username}`, { params: { privacy: false } },  {
+        const token = localStorage.getItem("token"); // Retrieve the token from localStorage
+        axios.get(`/posts/post/${username}`, {
+            params: { privacy: false },
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -45,7 +46,7 @@ function Profil() {
             setPosts(response.data);
         })
         .catch(error => {
-            console.error('Erreur lors de la récupération des posts', error);
+            console.error('Error fetching posts:', error);
         });
     }, [posts, username]);
     
@@ -94,7 +95,7 @@ function Profil() {
                 <button onClick={handleEdit}>Modifier</button>
             )}
             {posts.slice().reverse().map(postx => (
-                <Post post={postx} del={true} username={username} />
+                <Post key={postx._id} post={postx} del={true} username={username} />
             ))}
         </div>
     );
