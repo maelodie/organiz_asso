@@ -8,11 +8,8 @@ Organiz-asso est une plateforme en ligne destinée aux membres d'une association
 - [Technologies Utilisées](#technologies-utilisées)
 - [Prérequis](#prérequis)
 - [Installation](#installation)
+- [Démarrage](#démarrage)
 - [Utilisation](#utilisation)
-- [Architecture du Système](#architecture-du-système)
-- [Contribuer](#contribuer)
-- [Licences](#licences)
-- [Contact](#contact)
 
 ## Fonctionnalités
 ### Utilisateurs
@@ -50,6 +47,30 @@ Organiz-asso est une plateforme en ligne destinée aux membres d'une association
 2. Accédez au répertoire du projet :
    ```bash
    cd organiz-asso
-3. Installez less dépendances :
+3. Installez les dépendances (côté client et côté serveur):
    ```bash
    npm install
+4. Configurez les variables d'environnement. Créez un fichier .env à la racine du projet et ajoutez les configurations suivantes :
+   ```bash
+   PORT=3000
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_secret_key
+   
+## Démarrage:
+- Démarrage du serveur:
+```bash
+npm start
+```
+
+- Démarrage du client:
+```bash
+npm run dev
+```
+
+- Ouvrez votre navigateur et allez à http://localhost:3000.
+
+## Utilisation
+**Inscription** : Créez un compte via la page d'inscription.
+**Validation** : Attendez que votre compte soit validé par un administrateur.
+**Connexion** : Connectez-vous avec vos identifiants pour accéder au forum.
+**Participation** : Postez des messages, répondez aux discussions, et explorez les forums.
