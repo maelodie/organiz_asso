@@ -71,6 +71,9 @@ npm run dev
 
 ## Utilisation
 **Inscription** : Créez un compte via la page d'inscription.
+
 **Validation** : Attendez que votre compte soit validé par un administrateur.
+
 **Connexion** : Connectez-vous avec vos identifiants pour accéder au forum.
+
 **Participation** : Postez des messages, répondez aux discussions, et explorez les forums.
